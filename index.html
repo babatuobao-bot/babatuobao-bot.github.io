@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五运六气 · 黄帝内经运气学说</title>
+
+<!-- 引入复古中文字体 -->
+
+
+<style>
+  /* ========== 基础重置 ========== */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ========== 古典配色 ========== */
+  :root {
+    --paper: #f5f0e1;
+    --paper-dark: #e8dcc8;
+    --ink: #2c2418;
+    --ink-light: #5c4f3d;
+    --ink-faint: #8a7d6b;
+    --red-seal: #c23b27;
+    --gold: #b8952a;
+    --gold-light: #d4b96a;
+    --border: #c4b494;
+    --border-light: #ddd2be;
+    --shadow: rgba(44, 36, 24, 0.12);
+    --bg-deep: #3a3020;
+    --accent-blue: #3a6070;
+    --accent-green: #5a7a5a;
+    --accent-warm: #8b4513;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Noto Serif SC", "STKaiti", "KaiTi", "楷体", "SimSun", "宋体", serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ========== 背景纹理 ========== */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(184, 149, 42, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(58, 96, 112, 0.04) 0%, transparent 50%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 28px,
+        rgba(196, 180, 148, 0.08) 28px,
+        rgba(196, 180, 148, 0.08) 29px
+      );
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ========== 容器 ========== */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ========== 页首 ========== */
+  header {
+    text-align: center;
+    padding: 56px 24px 40px;
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(58, 48, 32, 0.97) 0%, rgba(74, 62, 46, 0.95) 50%, rgba(232, 220, 200, 0.3) 100%),
+      url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 Q30 30 50 50 Q70 30 50 10z' fill='none' stroke='%23d4b96a15' stroke-width='0.5'/%3E%3C/svg%3E");
+    color: var(--paper);
+    border-bottom: 3px double var(--gold);
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    width: 120px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .header-ornament {
+    font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+    font-size: 14px;
+    color: var(--gold-light);
+    letter-spacing: 16px;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+
+  header h1 {
+    font-family: "KaiTi", "STKaiti", "KaiTi_GB2312", "AR PL UKai CN", "AR PL UKai HK", "SimSun", serif;
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    margin-bottom: 10px;
+    background: linear-gradient(180deg, #fff8e8 30%, #d4b96a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  header .subtitle {
+    font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    letter-spacing: 0.3em;
+    font-weight: 300;
+    opacity: 0.85;
+  }
+
+  .seal {
+    display: inline-block;
+    border: 2px solid var(--red-seal);
+    color: var(--red-seal);
+    padding: 6px 10px;
+    font-family: "KaiTi", "STKaiti", "KaiTi_GB2312", "SimSun", serif;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    transform: rotate(-3deg);
+    margin-top: 18px;
+    opacity: 0.8;
+    border-radius: 2px;
+  }
+
+  /* ========== 导航标签 ========== */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    background: linear-gradient(180deg, var(--paper-dark) 0%, var(--paper) 100%);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+
+  .tab-btn {
+    padding: 16px 36px;
+    border: none;
+    background: transparent;
+    font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+    font-size: 1.05rem;
+    color: var(--ink-faint);
+    cursor: pointer;
+    letter-spacing: 0.2em;
+    position: relative;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover {
+    color: var(--ink);
+    background: rgba(184, 149, 42, 0.06);
+  }
+
+  .tab-btn.active {
+    color: var(--ink);
+    background: var(--paper);
+  }
+
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 25%; right: 25%;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .tab-icon {
+    margin-right: 6px;
+    font-size: 1.1rem;
+  }
+
+  /* ========== 内容面板 ========== */
+  .panel {
+    display: none;
+    padding: 40px 0 60px;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== 卷轴式卡片 ========== */
+  .scroll-card {
+    background:
+      linear-gradient(135deg, #fffdf7 0%, #f8f3e8 40%, var(--paper) 100%);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px 32px;
+    margin-bottom: 28px;
+    position: relative;
+    box-shadow:
+      0 3px 16px var(--shadow),
+      inset 0 0 40px rgba(232, 220, 200, 0.3),
+      inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+
+  /* 卷轴装饰角 */
+  .scroll-card::before,
+  .scroll-card::after {
+    content: '';
+    position: absolute;
+    width: 24px; height: 24px;
+    border-color: var(--gold-light);
+    opacity: 0.4;
+  }
+  .scroll-card::before {
+    top: 8px; left: 8px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .scroll-card::after {
+    bottom: 8px; right: 8px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: "KaiTi", "STKaiti", "KaiTi_GB2312", "Noto Serif SC", serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.3em;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-light);
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 35%; right: 35%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* ========== 表单元素 ========== */
+  .form-group {
+    display: flex;
+    gap: 18px;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .form-group label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    letter-spacing: 0.15em;
+  }
+
+  .form-group select,
+  .form-group input[type="number"] {
+    font-family: "Noto Serif SC", "KaiTi", "STKaiti", serif;
+    font-size: 1.05rem;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: #fffdf7;
+    color: var(--ink);
+    min-width: 110px;
+    text-align: center;
+    transition: border-color 0.2s;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .form-group select:focus,
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(184, 149, 42, 0.15);
+  }
+
+  .btn {
+    font-family: "KaiTi", "STKaiti", "KaiTi_GB2312", "Noto Serif SC", serif;
+    font-size: 1.05rem;
+    padding: 10px 32px;
+    border: 1px solid var(--gold);
+    background: linear-gradient(180deg, #c9a630 0%, #9a7d24 100%);
+    color: #fffdf7;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.2em;
+    transition: all 0.2s;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 6px rgba(184, 149, 42, 0.2);
+  }
+
+  .btn:hover {
+    background: linear-gradient(180deg, #d4b53a 0%, #b8952a 100%);
+    box-shadow: 0 3px 12px rgba(184, 149, 42, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 1px 4px rgba(184, 149, 42, 0.2);
+  }
+
+  /* ========== 结果展示 ========== */
+  .result-area {
+    display: none;
+  }
+
+  .result-area.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .result-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .result-header .ganzhi {
+    font-family: "KaiTi", "STKaiti", "KaiTi_GB2312", "AR PL UKai CN", "AR PL UKai HK", "SimSun", serif;
+    font-size: 2.2rem;
+    color: var(--red-seal);
+    letter-spacing: 0.25em;
+    font-weight: 400;
+    text-shadow: 0 1px 2px rgba(194, 59, 39, 0.1);
+  }
+
+  .result-header .year-label {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin-top: 6px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ========== 信息网格 ========== */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .info-item {
+    text-align: center;
+    padding: 16px 12px;
+    border: 1px solid var(--border-light);
+    border-radius: 3px;
+    background: rgba(255, 253, 247, 0.6);
+    transition: all 0.2s;
+  }
+
+  .info-item:hover {
+    box-shadow: 0 2px 8px var(--shadow);
+    border-color: var(--gold-light);
+  }
+
+  .info-item .label {
+    font-family: "STSong", "SimSun", serif;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+
+  .info-item .value {
+    font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+
+  .info-item .value.highlight {
+    color: var(--red-seal);
+    font-weight: 600;
+  }
+
+  /* ========== 经文区块 ========== */
+  .jingwen {
+    margin: 24px 0;
+    padding: 22px 26px;
+    border-left: 3px solid var(--gold);
+    background: linear-gradient(135deg, rgba(184, 149, 42, 0.04) 0%, rgba(184, 149, 42, 0.02) 100%);
+    border-radius: 0 3px 3px 0;
+  }
+
+  .jingwen .source {
+    font-family: "STSong", "SimSun", serif;
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+  }
+
+  .jingwen .classical {
+    font-family: "KaiTi", "STKaiti", "KaiTi_GB2312", "SimSun", serif;
+    font-size: 1.08rem;
+    color: var(--ink);
+    line-height: 2.2;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+
+  .jingwen .modern {
+    font-family: "Noto Serif SC", "KaiTi", "STKaiti", "SimSun", serif;
+    font-size: 0.92rem;
+    color: var(--ink-light);
+    line-height: 2;
+    border-top: 1px dashed var(--border-light);
+    padding-top: 14px;
+  }
+
+  .jingwen .modern::before {
+    content: '【白话解】';
+    font-family: "STSong", "SimSun", serif;
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+  }
+
+  /* ========== 节气表 ========== */
+  .jieqi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+    margin: 18px 0;
+  }
+
+  .jieqi-item {
+    text-align: center;
+    padding: 10px 6px;
+    font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-light);
+    border-radius: 3px;
+    background: rgba(255, 253, 247, 0.4);
+    transition: all 0.2s;
+  }
+
+  .jieqi-item.current {
+    border-color: var(--gold);
+    background: rgba(184, 149, 42, 0.12);
+    color: var(--gold);
+    font-weight: 600;
+    box-shadow: 0 0 0 1px var(--gold-light);
+  }
+
+  .jieqi-item .jq-name {
+    font-family: "KaiTi", "STKaiti", serif;
+    font-size: 1rem;
+    margin-bottom: 3px;
+  }
+
+  .jieqi-item .jq-date {
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+  }
+
+  /* ========== 疾病提示 ========== */
+  .disease-card {
+    padding: 18px 22px;
+    margin: 14px 0;
+    border-radius: 3px;
+    border: 1px solid;
+    transition: all 0.2s;
+  }
+
+  .disease-card:hover {
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+
+  .disease-card.high {
+    border-color: var(--red-seal);
+    background: rgba(194, 59, 39, 0.03);
+  }
+
+  .disease-card.medium {
+    border-color: var(--gold);
+    background: rgba(184, 149, 42, 0.03);
+  }
+
+  .disease-card.low {
+    border-color: var(--accent-green);
+    background: rgba(90, 122, 90, 0.03);
+  }
+
+  .disease-card .disease-title {
+    font-family: "STSong", "SimSun", serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+
+  .disease-card.high .disease-title { color: var(--red-seal); }
+  .disease-card.medium .disease-title { color: var(--gold); }
+  .disease-card.low .disease-title { color: var(--accent-green); }
+
+  /* ========== 灾害预测 ========== */
+  .disaster-item {
+    padding: 18px 22px;
+    margin: 14px 0;
+    border-left: 3px solid var(--accent-warm);
+    background: rgba(139, 69, 19, 0.03);
+    border-radius: 0 3px 3px 0;
+  }
+
+  .disaster-item .disaster-type {
+    font-family: "STSong", "SimSun", serif;
+    font-size: 0.88rem;
+    color: var(--accent-warm);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+
+  .disaster-item .disaster-desc {
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  /* ========== 分隔线 ========== */
+  .divider {
+    text-align: center;
+    margin: 28px 0;
+    color: var(--border);
+    font-size: 0.85rem;
+    letter-spacing: 0.5em;
+    font-family: "STSong", "SimSun", serif;
+  }
+
+  .divider::before, .divider::after {
+    content: '─── ';
+  }
+  .divider::after {
+    content: ' ───';
+  }
+
+  /* ========== 六步气位表格 ========== */
+  .qibiao {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+    font-size: 0.9rem;
+    margin: 16px 0;
+  }
+
+  .qibiao thead th {
+    padding: 10px 8px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-weight: 400;
+    font-family: "STSong", "SimSun", serif;
+    letter-spacing: 0.15em;
+    font-size: 0.82rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .qibiao tbody td {
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .qibiao tbody tr:hover {
+    background: rgba(184, 149, 42, 0.04);
+  }
+
+  /* ========== 页脚 ========== */
+  footer {
+    text-align: center;
+    padding: 36px 24px;
+    background:
+      linear-gradient(180deg, var(--bg-deep) 0%, #2a2218 100%);
+    color: var(--paper-dark);
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    border-top: 2px solid var(--gold);
+  }
+
+  footer .footer-quote {
+    font-family: "KaiTi", "STKaiti", "KaiTi_GB2312", "SimSun", serif;
+    font-style: italic;
+    margin-bottom: 8px;
+    color: var(--gold-light);
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
+  }
+
+  footer .footer-source {
+    font-family: "STSong", "SimSun", serif;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* ========== 响应式 ========== */
+  @media (max-width: 600px) {
+    .tab-btn { padding: 14px 18px; font-size: 0.92rem; }
+    .scroll-card { padding: 24px 18px; }
+    .form-group { flex-direction: column; align-items: stretch; }
+    .jieqi-grid { grid-template-columns: repeat(3, 1fr); }
+    .info-grid { grid-template-columns: repeat(2, 1fr); }
+    header h1 { letter-spacing: 0.15em; }
+    .qibiao { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 页首 ===== -->
+<header>
+  <div class="header-ornament">☰ ☱ ☲ ☳ ☴ ☵ ☶ ☷</div>
+  <h1>五运六气</h1>
+  <div class="subtitle">黄帝内经 · 运气学说查询</div>
+  <div class="seal">素 问</div>
+</header>
+
+<!-- ===== 导航 ===== -->
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="year">
+    <span class="tab-icon">📅</span>年运查询
+  </button>
+  <button class="tab-btn" data-tab="personal">
+    <span class="tab-icon">👤</span>个人运气
+  </button>
+  <button class="tab-btn" data-tab="weather">
+    <span class="tab-icon">🌤</span>天气预测
+  </button>
+</nav>
+
+<!-- ===== 内容区 ===== -->
+<div class="container">
+
+<!-- ===== 第一面板：年运查询 ===== -->
+<section id="panel-year" class="panel active">
+  <div class="scroll-card">
+    <h2 class="section-title">年运查询</h2>
+    <p style="text-align:center;color:var(--ink-faint);font-size:0.92rem;margin-bottom:24px;font-family:'Noto Serif SC',serif;">
+      输入年份，查询该年天干地支、五运六气，及《黄帝内经》相关原文
+    </p>
+    <div class="form-group">
+      <label>
+        <span>年份</span>
+        <input type="number" id="year-input" min="1" max="9999" value="2026">
+      </label>
+      <button class="btn" onclick="queryYear()">查 询</button>
+    </div>
+
+    <div id="year-result" class="result-area"></div>
+  </div>
+</section>
+
+<!-- ===== 第二面板：个人运气 ===== -->
+<section id="panel-personal" class="panel">
+  <div class="scroll-card">
+    <h2 class="section-title">个人运气查询</h2>
+    <p style="text-align:center;color:var(--ink-faint);font-size:0.92rem;margin-bottom:24px;font-family:'Noto Serif SC',serif;">
+      输入公历出生日期，推算先天运气体质及易发疾病
+    </p>
+    <div class="form-group">
+      <label>
+        <span>年</span>
+        <input type="number" id="birth-year" min="1900" max="2100" value="1990">
+      </label>
+      <label>
+        <span>月</span>
+        <select id="birth-month">
+          <option value="1">一月</option><option value="2">二月</option>
+          <option value="3">三月</option><option value="4">四月</option>
+          <option value="5">五月</option><option value="6">六月</option>
+          <option value="7">七月</option><option value="8">八月</option>
+          <option value="9">九月</option><option value="10">十月</option>
+          <option value="11">十一月</option><option value="12">十二月</option>
+        </select>
+      </label>
+      <label>
+        <span>日</span>
+        <select id="birth-day"></select>
+      </label>
+      <button class="btn" onclick="queryPersonal()">查 询</button>
+    </div>
+
+    <div id="personal-result" class="result-area"></div>
+  </div>
+</section>
+
+<!-- ===== 第三面板：天气预测 ===== -->
+<section id="panel-weather" class="panel">
+  <div class="scroll-card">
+    <h2 class="section-title">天气灾害预测</h2>
+    <p style="text-align:center;color:var(--ink-faint);font-size:0.92rem;margin-bottom:24px;font-family:'Noto Serif SC',serif;">
+      据《内经》五运六气理论，推演当年气候特征与灾害倾向
+    </p>
+    <div class="form-group">
+      <label>
+        <span>年份</span>
+        <input type="number" id="weather-year" min="1" max="9999" value="2026">
+      </label>
+      <button class="btn" onclick="queryWeather()">推 演</button>
+    </div>
+
+    <div id="weather-result" class="result-area"></div>
+  </div>
+</section>
+
+</div><!-- .container -->
+
+<!-- ===== 页脚 ===== -->
+<footer>
+  <div class="footer-quote">"上古之人，其知道者，法于阴阳，和于术数"</div>
+  <div class="footer-source">——《黄帝内经 · 素问 · 上古天真论》——</div>
+  <div style="margin-top:10px;opacity:0.5;">五运六气查询 · 仅供学习参考</div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ===== 天干地支常量 =====
+  var TIANGAN = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+  var DIZHI   = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+
+  // ===== 五行 =====
+  var WUXING_COLORS = {
+    '木': '#5a7a5a', '火': '#c23b27', '土': '#b8952a',
+    '金': '#8a8a7a', '水': '#3a6070'
+  };
+
+  // ===== 五运对应 =====
+  var YUN_MAP = {
+    '甲':'土','乙':'金','丙':'水','丁':'木','戊':'火',
+    '己':'土','庚':'金','辛':'水','壬':'木','癸':'火'
+  };
+
+  // ===== 太过/不及 =====
+  var GUO_MAP = {
+    '甲':'太过','乙':'不及','丙':'太过','丁':'不及','戊':'太过',
+    '己':'不及','庚':'太过','辛':'不及','壬':'太过','癸':'不及'
+  };
+
+  // ===== 司天在泉 =====
+  var SITIAN_MAP = {
+    '子': {si:'少阴君火',zai:'阳明燥金'},
+    '丑': {si:'太阴湿土',zai:'太阳寒水'},
+    '寅': {si:'少阳相火',zai:'厥阴风木'},
+    '卯': {si:'阳明燥金',zai:'少阴君火'},
+    '辰': {si:'太阳寒水',zai:'太阴湿土'},
+    '巳': {si:'厥阴风木',zai:'少阳相火'},
+    '午': {si:'少阴君火',zai:'阳明燥金'},
+    '未': {si:'太阴湿土',zai:'太阳寒水'},
+    '申': {si:'少阳相火',zai:'厥阴风木'},
+    '酉': {si:'阳明燥金',zai:'少阴君火'},
+    '戌': {si:'太阳寒水',zai:'太阴湿土'},
+    '亥': {si:'厥阴风木',zai:'少阳相火'}
+  };
+
+  // ===== 五行对应脏腑 =====
+  var WUXING_ORG = {
+    '木': {zang:'肝',fu:'胆',ji:'筋',season:'春',qi:'风',emotion:'怒',taste:'酸'},
+    '火': {zang:'心',fu:'小肠',ji:'脉',season:'夏',qi:'热',emotion:'喜',taste:'苦'},
+    '土': {zang:'脾',fu:'胃',ji:'肉',season:'长夏',qi:'湿',emotion:'思',taste:'甘'},
+    '金': {zang:'肺',fu:'大肠',ji:'皮',season:'秋',qi:'燥',emotion:'悲',taste:'辛'},
+    '水': {zang:'肾',fu:'膀胱',ji:'骨',season:'冬',qi:'寒',emotion:'恐',taste:'咸'}
+  };
+
+  // ===== 二十四节气 =====
+  var JIEQI_LIST = [
+    '立春','雨水','惊蛰','春分','清明','谷雨',
+    '立夏','小满','芒种','夏至','小暑','大暑',
+    '立秋','处暑','白露','秋分','寒露','霜降',
+    '立冬','小雪','大雪','冬至','小寒','大寒'
+  ];
+
+  var JIEQI_DATES = {
+    '立春':'2月4日','雨水':'2月19日','惊蛰':'3月6日','春分':'3月21日',
+    '清明':'4月5日','谷雨':'4月20日','立夏':'5月6日','小满':'5月21日',
+    '芒种':'6月6日','夏至':'6月21日','小暑':'7月7日','大暑':'7月23日',
+    '立秋':'8月8日','处暑':'8月23日','白露':'9月8日','秋分':'9月23日',
+    '寒露':'10月8日','霜降':'10月23日','立冬':'11月7日','小雪':'11月22日',
+    '大雪':'12月7日','冬至':'12月22日','小寒':'1月6日','大寒':'1月20日'
+  };
+
+  // ===== 计算函数 =====
+  function getGanZhi(year) {
+    var gan = TIANGAN[(year - 4) % 10];
+    var zhi = DIZHI[(year - 4) % 12];
+    return { gan: gan, zhi: zhi, full: gan + zhi };
+  }
+
+  function getYun(gan) {
+    return YUN_MAP[gan];
+  }
+
+  function getGuo(gan) {
+    return GUO_MAP[gan];
+  }
+
+  function getSiZai(zhi) {
+    return SITIAN_MAP[zhi];
+  }
+
+  // 六步气位
+  function getLiuBuSiQi(zhi) {
+    var KEQI_ORDER = ['厥阴风木','少阴君火','太阴湿土','少阳相火','阳明燥金','太阳寒水'];
+    var ZHI_TO_KEQI_IDX = {
+      '寅':0,'卯':1,'辰':2,'巳':3,'午':4,'未':5,
+      '申':0,'酉':1,'戌':2,'亥':3,'子':4,'丑':5
+    };
+    var siTianIdx = ZHI_TO_KEQI_IDX[zhi];
+    var siTian = KEQI_ORDER[siTianIdx];
+    var zaiQuan = KEQI_ORDER[(siTianIdx + 3) % 6];
+
+    var keqi = [];
+    var zhuqi = ['厥阴风木','少阴君火','少阳相火','太阴湿土','阳明燥金','太阳寒水'];
+    for (var i = 0; i < 6; i++) {
+      keqi.push(KEQI_ORDER[(siTianIdx + i - 2 + 6) % 6]);
+    }
+
+    return { keqi: keqi, zhuqi: zhuqi, siTian: siTian, zaiQuan: zaiQuan };
+  }
+
+  // 当前节气
+  function getCurrentJieqi(month, day) {
+    var jieqiApprox = [
+      {name:'小寒',m:1,d:6},{name:'大寒',m:1,d:20},
+      {name:'立春',m:2,d:4},{name:'雨水',m:2,d:19},
+      {name:'惊蛰',m:3,d:6},{name:'春分',m:3,d:21},
+      {name:'清明',m:4,d:5},{name:'谷雨',m:4,d:20},
+      {name:'立夏',m:5,d:6},{name:'小满',m:5,d:21},
+      {name:'芒种',m:6,d:6},{name:'夏至',m:6,d:21},
+      {name:'小暑',m:7,d:7},{name:'大暑',m:7,d:23},
+      {name:'立秋',m:8,d:8},{name:'处暑',m:8,d:23},
+      {name:'白露',m:9,d:8},{name:'秋分',m:9,d:23},
+      {name:'寒露',m:10,d:8},{name:'霜降',m:10,d:23},
+      {name:'立冬',m:11,d:7},{name:'小雪',m:11,d:22},
+      {name:'大雪',m:12,d:7},{name:'冬至',m:12,d:22}
+    ];
+    var now = month * 100 + day;
+    var current = jieqiApprox[23];
+    for (var i = 0; i < jieqiApprox.length; i++) {
+      if (now >= jieqiApprox[i].m * 100 + jieqiApprox[i].d) {
+        current = jieqiApprox[i];
+      }
+    }
+    return current;
+  }
+
+  // ===== 经文数据库 =====
+  var JINGWEN = {
+    '土运': {
+      source: '《素问 · 五运行大论》',
+      classical: '岁土太过，雨湿流行，肾水受邪。民病腹痛，清厥意不乐，体重烦冤。上应镇星。甚则肌肉萎，足痿不收，行善瘛，脚下痛，饮发中满食减，四肢不举。',
+      modern: '土运太过之年，雨水湿气盛行，肾水受到邪气侵犯。人们容易患腹痛、四肢厥冷、情绪低落、身体沉重、烦闷等病症。严重的会出现肌肉萎缩、下肢痿软无力、行走抽搐、脚下疼痛、水饮内停、脘腹胀满、食欲减退、四肢无力等症状。'
+    },
+    '土运不及': {
+      source: '《素问 · 气交变大论》',
+      classical: '岁土不及，风乃大行，化气不令，草木茂荣，飘扬而甚，秀而不实。民病飧泄霍乱，体重腹痛，筋骨繇复，肌肉瞤酸，善怒。',
+      modern: '土运不及之年，风气大盛，脾土化气不能正常发挥作用。人们易患泄泻、霍乱、身体沉重腹痛、筋骨动摇、肌肉酸痛、容易发怒等症状。'
+    },
+    '金运': {
+      source: '《素问 · 五常政大论》',
+      classical: '岁金太过，燥气流行，肝木受邪。民病两胁下少腹痛，目赤痛眦疡，耳无所闻。肃杀而甚，则体重烦冤，胸痛引背，两胁满且痛引少腹。',
+      modern: '金运太过之年，燥气盛行，肝木受到邪气侵犯。人们容易两胁和小腹疼痛、眼睛红肿疼痛、眼角生疮、听力下降。肃杀之气太过的话，还会出现身体沉重烦闷、胸痛连及背部、两胁胀满疼痛连及小腹等症状。'
+    },
+    '金运不及': {
+      source: '《素问 · 气交变大论》',
+      classical: '岁金不及，炎火乃行，生气乃用，长气专胜。民病肩背瞀重，鼽嚏，血便注下。',
+      modern: '金运不及之年，火热之气盛行，生长之气旺盛。人们易患肩背沉重闷痛、鼻塞流涕打喷嚏、便血、泄泻不止等病症。'
+    },
+    '水运': {
+      source: '《素问 · 气交变大论》',
+      classical: '岁水太过，寒气流行，邪害心火。民病身热烦心躁悸，阴厥上下中寒，谵妄心痛。甚则腹大胫肿，喘咳寝汗出憎风。',
+      modern: '水运太过之年，寒气流行，心火受到邪气侵犯。人们容易身热心烦、心悸躁动、四肢厥冷、全身发冷、胡言乱语、心痛。严重的会出现腹部胀大、小腿浮肿、气喘咳嗽、睡中出汗、怕风等症状。'
+    },
+    '水运不及': {
+      source: '《素问 · 气交变大论》',
+      classical: '岁水不及，湿乃大行，长气反用。民病腹满身重，濡泄寒疡流水，腰股痛发，腘腨股膝不便，烦冤足痿清厥，跗肿。',
+      modern: '水运不及之年，湿气大盛，人们易患腹部胀满、身体沉重、水样泄泻、腰部及大腿疼痛、膝部活动不利、烦闷、足部痿软厥冷、脚面浮肿等病症。'
+    },
+    '木运': {
+      source: '《素问 · 五常政大论》',
+      classical: '岁木太过，风气流行，脾土受邪。民病飧泄食减，体重烦冤，肠鸣腹支满。甚则忽忽善怒，眩冒巅疾。',
+      modern: '木运太过之年，风气盛行，脾土受到邪气侵犯。人们容易患泄泻、食欲减退、身体沉重烦闷、肠鸣腹胀。严重的会出现容易发怒、头晕目眩、头部疾患等症状。'
+    },
+    '木运不及': {
+      source: '《素问 · 气交变大论》',
+      classical: '岁木不及，燥乃大行。民病中清，胠胁痛，少腹痛，肠鸣溏泄。',
+      modern: '木运不及之年，燥气大盛。人们易患脾胃虚寒、胸胁疼痛、小腹疼痛、肠鸣、大便稀溏泄泻等病症。'
+    },
+    '火运': {
+      source: '《素问 · 气交变大论》',
+      classical: '岁火太过，炎暑流行，肺金受邪。民病疟少气咳喘，血溢血泄注下，嗌燥耳聋，中热肩背热。',
+      modern: '火运太过之年，炎暑盛行，肺金受到邪气侵犯。人们容易患疟疾、气短咳喘、各种出血（吐血、便血、泄泻）、咽喉干燥、耳聋、内热、肩背发热等症状。'
+    },
+    '火运不及': {
+      source: '《素问 · 气交变大论》',
+      classical: '岁火不及，寒乃大行。民病胸中痛，胁支满，两胁痛，膺背肩胛间及两臂内痛，郁冒朦昧，心痛暴瘖。',
+      modern: '火运不及之年，寒气大盛。人们易患胸中疼痛、胸胁胀满、两胁疼痛、胸前和肩胛之间以及两臂内侧疼痛、郁闷眩晕、心痛、突然失音等病症。'
+    }
+  };
+
+  // 司天在泉经文
+  var SITIAN_JINGWEN = {
+    '少阴君火': {
+      source: '《素问 · 六元正纪大论》',
+      classical: '少阴司天，热气下临，肺气上从，白起金用，草木眚。喘呕寒热，嚏鼽衄鼻窒。',
+      modern: '少阴君火司天之年，热气从天而下降，肺气受其影响而顺应，燥金之气兴起，草木受害。人们易患气喘、呕吐、寒热往来、打喷嚏、流鼻涕、流鼻血、鼻塞等病症。'
+    },
+    '太阴湿土': {
+      source: '《素问 · 六元正纪大论》',
+      classical: '太阴司天，湿气下临，肾气上从，黑起水变，埃冒云雨。胸中不利，阴萎气大衰而不起不用。',
+      modern: '太阴湿土司天之年，湿气从天而下降，肾气受其影响而顺应，水气发生变化，乌云密布多雨。人们易患胸中不舒畅、阳萎、元气大衰等病症。'
+    },
+    '少阳相火': {
+      source: '《素问 · 六元正纪大论》',
+      classical: '少阳司天，火气下临，肺气上从，白起金用，风行乃厉。大暑以行，咳嚏鼽衄鼻窒，曰疡寒热胕肿。',
+      modern: '少阳相火司天之年，火气从天而下降，肺气受其影响而顺应，燥金之气兴起，风行严厉。大暑流行，人们易患咳嗽、打喷嚏、流鼻涕、流鼻血、鼻塞、口腔溃疡、寒热、足部浮肿等病症。'
+    },
+    '阳明燥金': {
+      source: '《素问 · 六元正纪大论》',
+      classical: '阳明司天，燥气下临，肝气上从，苍起木用。风乃暴举，木落草枯。民病左胠胁痛，寒清于中，感而疟。',
+      modern: '阳明燥金司天之年，燥气从天而下降，肝气受其影响而顺应，木气兴起。风气突然大起，树木落叶草木枯萎。人们易患左侧胸胁疼痛、内有寒凉、感受疟邪等病症。'
+    },
+    '太阳寒水': {
+      source: '《素问 · 六元正纪大论》',
+      classical: '太阳司天，寒气下临，心气上从，而火且明。寒清时举，胜则水冰。民病寒反热中，痈疽注下，心热烦闷。',
+      modern: '太阳寒水司天之年，寒气从天而下降，心气受其影响而顺应。寒气时常发作，甚则水结冰。人们易患外寒内热、痈疽疮疡、泄泻、心热烦闷等病症。'
+    },
+    '厥阴风木': {
+      source: '《素问 · 六元正纪大论》',
+      classical: '厥阴司天，风气下临，脾气上从，而土且隆。风乃大行，雨化乃见。民病体重肌肉萎，食减口爽，目转耳鸣。',
+      modern: '厥阴风木司天之年，风气从天而下降，脾气受其影响而顺应，土气隆盛。风气大行，降雨增多。人们易患身体沉重、肌肉萎缩、食欲减退、口淡无味、目眩耳鸣等病症。'
+    }
+  };
+
+  var ZAIQUAN_JINGWEN = {
+    '阳明燥金': {
+      source: '《素问 · 至真要大论》',
+      classical: '阳明在泉，燥淫所胜，则霿雾清暝。民病喜呕，呕有苦，善太息，心胁痛不能反侧。',
+      modern: '阳明燥金在泉之年，燥气过盛，则雾气弥漫天气清冷昏暗。人们易患呕吐、口苦、喜欢叹气、心胁疼痛不能翻身等病症。'
+    },
+    '太阳寒水': {
+      source: '《素问 · 至真要大论》',
+      classical: '太阳在泉，寒淫所胜，则凝肃惨栗。民病少腹控睾，引腰脊，上冲心痛，血见嗌痛颔肿。',
+      modern: '太阳寒水在泉之年，寒气过盛，则天寒地冻令人战栗。人们易患小腹牵引睾丸疼痛、牵连腰脊、寒气上冲心痛、出血、咽喉痛、面颊肿胀等病症。'
+    },
+    '厥阴风木': {
+      source: '《素问 · 至真要大论》',
+      classical: '厥阴在泉，风淫所胜，则地气不明，平野昧。民病洒洒振寒，善伸数欠，心痛支满。',
+      modern: '厥阴风木在泉之年，风气过盛，则大地之气不清明，平野模糊。人们易患寒战发冷、喜欢伸懒腰打哈欠、心痛胸满等病症。'
+    },
+    '少阴君火': {
+      source: '《素问 · 至真要大论》',
+      classical: '少阴在泉，热淫所胜，则焰浮川泽，阴处反明。民病腹中常鸣，气上冲胸，喘不能久立。',
+      modern: '少阴君火在泉之年，热气过盛，则火焰浮于河泽，阴蔽之处反而明亮。人们易患腹中经常鸣响、气上冲胸、气喘不能久站等病症。'
+    },
+    '太阴湿土': {
+      source: '《素问 · 至真要大论》',
+      classical: '太阴在泉，湿淫所胜，则草乃早荣。民病饮积，心痛耳聋，浑浑焞焞，嗌肿喉痹。',
+      modern: '太阴湿土在泉之年，湿气过盛，则草木提前繁荣。人们易患水饮停积、心痛、耳聋耳鸣、咽喉肿、喉痹等病症。'
+    },
+    '少阳相火': {
+      source: '《素问 · 至真要大论》',
+      classical: '少阳在泉，火淫所胜，则焰明郊野。民病注泄赤白，少腹痛溺赤，甚则血便。',
+      modern: '少阳相火在泉之年，火气过盛，则郊野明亮如火焰。人们易患赤白泄泻、小腹疼痛、小便赤红、严重的便血等病症。'
+    }
+  };
+
+  // 个人体质经文
+  var BODY_JINGWEN = {
+    '木': {
+      source: '《素问 · 阴阳应象大论》',
+      classical: '东方生风，风生木，木生酸，酸生肝，肝生筋，筋生心。肝主目。其在天为风，在地为木，在体为筋，在脏为肝，在色为苍，在音为角，在声为呼，在变动为握，在窍为目，在味为酸，在志为怒。',
+      modern: '东方对应风，风对应木，木对应酸味，酸味对应肝脏，肝对应筋。肝开窍于目。先天木气旺盛者，体质偏于肝木，性情或偏急躁易怒，需注意肝脏保健。'
+    },
+    '火': {
+      source: '《素问 · 阴阳应象大论》',
+      classical: '南方生热，热生火，火生苦，苦生心，心生血，血生脾。心主舌。其在天为热，在地为火，在体为脉，在脏为心，在色为赤，在音为徵，在声为笑，在变动为忧，在窍为舌，在味为苦，在志为喜。',
+      modern: '南方对应热，热对应火，火对应苦味，苦味对应心脏，心对应血脉。心开窍于舌。先天火气旺盛者，体质偏于心火，性情或偏开朗热情，需注意心血管健康。'
+    },
+    '土': {
+      source: '《素问 · 阴阳应象大论》',
+      classical: '中央生湿，湿生土，土生甘，甘生脾，脾生肉，肉生肺。脾主口。其在天为湿，在地为土，在体为肉，在脏为脾，在色为黄，在音为宫，在声为歌，在变动为哕，在窍为口，在味为甘，在志为思。',
+      modern: '中央对应湿，湿对应土，土对应甘味，甘味对应脾脏，脾对应肌肉。脾开窍于口。先天土气旺盛者，体质偏于脾土，思虑较重，需注意脾胃消化功能。'
+    },
+    '金': {
+      source: '《素问 · 阴阳应象大论》',
+      classical: '西方生燥，燥生金，金生辛，辛生肺，肺生皮毛，皮毛生肾。肺主鼻。其在天为燥，在地为金，在体为皮毛，在脏为肺，在色为白，在音为商，在声为哭，在变动为咳，在窍为鼻，在味为辛，在志为悲。',
+      modern: '西方对应燥，燥对应金，金对应辛味，辛味对应肺脏，肺对应皮毛。肺开窍于鼻。先天金气旺盛者，体质偏于肺金，情感或偏悲秋伤感，需注意呼吸系统保养。'
+    },
+    '水': {
+      source: '《素问 · 阴阳应象大论》',
+      classical: '北方生寒，寒生水，水生咸，咸生肾，肾生骨髓，髓生肝。肾主耳。其在天为寒，在地为水，在体为骨，在脏为肾，在色为黑，在音为羽，在声为呻，在变动为栗，在窍为耳，在味为咸，在志为恐。',
+      modern: '北方对应寒，寒对应水，水对应咸味，咸味对应肾脏，肾对应骨髓。肾开窍于耳。先天水气旺盛者，体质偏于肾水，性情或偏沉静内敛，需注意肾脏及骨骼保养。'
+    }
+  };
+
+  // 天气灾害预测
+  var WEATHER_PREDICTION = {
+    '木运': {
+      overall: '木运太过，风邪偏盛。全年风力较大，春季尤甚，可能出现暴风、龙卷风等强对流天气。',
+      disasters: [
+        { type: '风灾', desc: '春季大风频繁，可能出现暴风、龙卷风等极端天气，对农业、建筑造成损害。' },
+        { type: '脾胃相关', desc: '风气太过则脾土受克，全年可能出现异常降雨变化，影响农作物生长。' },
+        { type: '气候偏温', desc: '全年气温偏高，春夏季可能提前，冬季偏暖。' }
+      ],
+      source: '《素问 · 气交变大论》："岁木太过，风气流行，脾土受邪。"',
+      modern: '木运太过之年，全年以风气偏盛为主要特征，需防范春季大风及异常天气。'
+    },
+    '木运不及': {
+      overall: '木运不及，燥气反胜。全年气候偏干燥，风力偏弱但秋季燥气明显。',
+      disasters: [
+        { type: '干旱', desc: '春季降水偏少，可能出现春旱，影响春耕播种。' },
+        { type: '秋燥', desc: '秋季燥气偏重，可能出现秋旱，空气湿度低。' },
+        { type: '温度偏低', desc: '全年气温偏低，春夏季可能延迟。' }
+      ],
+      source: '《素问 · 气交变大论》："岁木不及，燥乃大行。"',
+      modern: '木运不及之年，全年以燥气偏盛为主要特征，需注意防旱。'
+    },
+    '火运': {
+      overall: '火运太过，暑热偏盛。全年气温偏高，夏季可能出现极端高温天气。',
+      disasters: [
+        { type: '高温干旱', desc: '夏季炎热异常，可能出现持续高温天气，部分地区出现严重干旱。' },
+        { type: '森林火灾', desc: '干燥季节火灾风险增加，需加强防火。' },
+        { type: '暴雨骤至', desc: '热极反雨，可能突发暴雨洪涝，尤其是夏秋之交。' }
+      ],
+      source: '《素问 · 气交变大论》："岁火太过，炎暑流行，肺金受邪。"',
+      modern: '火运太过之年，需重点防范夏季高温酷暑及由此引发的干旱、火灾等灾害。'
+    },
+    '火运不及': {
+      overall: '火运不及，寒气偏盛。全年气温偏低，夏季不热，可能出现倒春寒、冷夏等现象。',
+      disasters: [
+        { type: '低温冷害', desc: '全年气温偏低，农作物生长期可能受到影响。' },
+        { type: '倒春寒', desc: '春季气温反复，可能出现倒春寒，影响春播作物。' },
+        { type: '降水偏多', desc: '寒湿之气偏盛，降水可能偏多，部分地区可能出现洪涝。' }
+      ],
+      source: '《素问 · 气交变大论》："岁火不及，寒乃大行。"',
+      modern: '火运不及之年，需重点防范低温冷害及由此引发的农业损失。'
+    },
+    '土运': {
+      overall: '土运太过，湿气偏盛。全年降雨偏多，湿度较大，可能出现洪涝灾害。',
+      disasters: [
+        { type: '洪涝', desc: '全年降雨偏多，夏季可能出现严重洪涝灾害，低洼地区需特别注意。' },
+        { type: '泥石流/滑坡', desc: '强降雨可能引发山区泥石流和山体滑坡。' },
+        { type: '湿度过高', desc: '空气湿度长期偏高，食物易霉变，需防潮防霉。' }
+      ],
+      source: '《素问 · 气交变大论》："岁土太过，雨湿流行，肾水受邪。"',
+      modern: '土运太过之年，需重点防范暴雨洪涝及次生灾害。'
+    },
+    '土运不及': {
+      overall: '土运不及，风气反胜。全年风力偏大，降雨偏少，可能出现干旱。',
+      disasters: [
+        { type: '干旱', desc: '全年降雨偏少，可能出现季节性干旱，农业用水紧张。' },
+        { type: '沙尘天气', desc: '风大土燥，可能出现沙尘暴或扬沙天气。' },
+        { type: '温差大', desc: '昼夜温差可能较大，天气变化频繁。' }
+      ],
+      source: '《素问 · 气交变大论》："岁土不及，风乃大行，化气不令。"',
+      modern: '土运不及之年，需重点防范干旱及风沙天气。'
+    },
+    '金运': {
+      overall: '金运太过，燥气偏盛。全年空气干燥，秋季燥气尤重，降水偏少。',
+      disasters: [
+        { type: '干旱', desc: '全年降水偏少，特别是秋季可能出现严重秋旱。' },
+        { type: '寒潮', desc: '秋季降温剧烈，可能出现早霜和寒潮。' },
+        { type: '空气质量', desc: '干燥少雨可能导致空气质量下降，雾霾天气增多。' }
+      ],
+      source: '《素问 · 气交变大论》："岁金太过，燥气流行，肝木受邪。"',
+      modern: '金运太过之年，需重点防范干旱和秋季骤寒天气。'
+    },
+    '金运不及': {
+      overall: '金运不及，火气反胜。全年气温偏高，秋季温暖异常。',
+      disasters: [
+        { type: '暖秋', desc: '秋季气温偏高，可能出现异常温暖的天气，影响农作物收获。' },
+        { type: '冬暖', desc: '冬季可能偏暖，降雪偏少。' },
+        { type: '极端天气', desc: '气候反常可能导致极端天气事件增多。' }
+      ],
+      source: '《素问 · 气交变大论》："岁金不及，炎火乃行，生气乃用。"',
+      modern: '金运不及之年，需关注气候反常带来的各类极端天气。'
+    },
+    '水运': {
+      overall: '水运太过，寒气偏盛。全年气温偏低，冬季严寒，雨雪偏多。',
+      disasters: [
+        { type: '严寒', desc: '冬季气温偏低，可能出现极端低温和暴雪天气。' },
+        { type: '雨雪冰冻', desc: '可能出现大范围雨雪冰冻灾害，影响交通和电力。' },
+        { type: '春涝', desc: '春季融雪可能导致河流水位上涨，出现春汛。' }
+      ],
+      source: '《素问 · 气交变大论》："岁水太过，寒气流行，邪害心火。"',
+      modern: '水运太过之年，需重点防范严寒冰冻天气及次生灾害。'
+    },
+    '水运不及': {
+      overall: '水运不及，湿气反胜。全年湿度偏大，降雨偏多，可能出现洪涝。',
+      disasters: [
+        { type: '洪涝', desc: '全年降雨偏多，部分地区可能出现洪涝灾害。' },
+        { type: '暖冬', desc: '冬季可能偏暖，降雪偏少。' },
+        { type: '湿冷', desc: '虽然气温不低，但湿气重导致体感阴冷潮湿。' }
+      ],
+      source: '《素问 · 气交变大论》："岁水不及，湿乃大行，长气反用。"',
+      modern: '水运不及之年，需重点防范湿涝灾害及潮湿天气带来的影响。'
+    }
+  };
+
+  // ===== 工具函数 =====
+  function renderJingwenBlock(source, classical, modern) {
+    var html = '<div class="jingwen">';
+    html += '<div class="source">' + source + '</div>';
+    if (classical) {
+      html += '<div class="classical">' + classical + '</div>';
+    }
+    html += '<div class="modern">' + modern + '</div>';
+    html += '</div>';
+    return html;
+  }
+
+  // ===== 年运查询 =====
+  window.queryYear = function() {
+    try {
+      var yearInput = document.getElementById('year-input');
+      if (!yearInput) return;
+      var year = parseInt(yearInput.value);
+      if (isNaN(year) || year < 1) { alert('请输入有效年份'); return; }
+
+      var gz = getGanZhi(year);
+      var yun = getYun(gz.gan);
+      var guo = getGuo(gz.gan);
+      var yunKey = yun + (guo !== '不及' ? '' : '不及');
+      var sz = getSiZai(gz.zhi);
+      var lb = getLiuBuSiQi(gz.zhi);
+
+      var now = new Date();
+      var curJq = getCurrentJieqi(now.getMonth() + 1, now.getDate());
+
+      var jw = JINGWEN[yunKey] || {
+        source: '《素问》相关篇章',
+        classical: '暂无具体经文记录',
+        modern: '此运特征待补充'
+      };
+
+      var stjw = SITIAN_JINGWEN[sz.si] || {
+        source: '《素问》', classical: '暂无记录', modern: '待补充'
+      };
+      var zqjw = ZAIQUAN_JINGWEN[sz.zai] || {
+        source: '《素问》', classical: '暂无记录', modern: '待补充'
+      };
+
+      var qiSteps = ['初之气','二之气','三之气（司天）','四之气','五之气','终之气（在泉）'];
+      var qiPeriods = ['大寒-春分','春分-小满','小满-大暑','大暑-秋分','秋分-小雪','小雪-大寒'];
+
+      var html = '';
+      html += '<div class="result-header">';
+      html += '<div class="ganzhi">' + gz.full + '年</div>';
+      html += '<div class="year-label">公元 ' + year + ' 年 · 天干地支纪年</div>';
+      html += '</div>';
+
+      html += '<div class="info-grid">';
+      html += '<div class="info-item"><div class="label">天干</div><div class="value">' + gz.gan + '（' + guo + '）</div></div>';
+      html += '<div class="info-item"><div class="label">地支</div><div class="value">' + gz.zhi + '</div></div>';
+      html += '<div class="info-item"><div class="label">主运</div><div class="value highlight">' + yun + '运 · ' + guo + '</div></div>';
+      html += '<div class="info-item"><div class="label">司天</div><div class="value highlight">' + sz.si + '</div></div>';
+      html += '<div class="info-item"><div class="label">在泉</div><div class="value highlight">' + sz.zai + '</div></div>';
+      html += '<div class="info-item"><div class="label">当前节气</div><div class="value">' + curJq.name + '</div></div>';
+      html += '</div>';
+
+      html += '<div class="divider">六气六步</div>';
+      html += '<div style="overflow-x:auto;margin:16px 0;">';
+      html += '<table class="qibiao"><thead><tr>';
+      html += '<th>气步</th><th>主气</th><th>客气</th><th>时段</th>';
+      html += '</tr></thead><tbody>';
+      for (var i = 0; i < 6; i++) {
+        var isSpecial = (i === 2 || i === 5);
+        html += '<tr>';
+        html += '<td style="' + (isSpecial ? 'color:var(--red-seal);font-weight:600;' : '') + '">' + qiSteps[i] + '</td>';
+        html += '<td>' + lb.zhuqi[i] + '</td>';
+        html += '<td style="' + (isSpecial ? 'color:var(--red-seal);' : '') + '">' + lb.keqi[i] + '</td>';
+        html += '<td style="font-size:0.8rem;color:var(--ink-faint);">' + qiPeriods[i] + '</td>';
+        html += '</tr>';
+      }
+      html += '</tbody></table></div>';
+
+      html += '<div class="divider">五运详述</div>';
+      html += renderJingwenBlock(jw.source, jw.classical, jw.modern);
+
+      html += '<div class="divider">司天之气</div>';
+      html += renderJingwenBlock(stjw.source, stjw.classical, stjw.modern);
+
+      html += '<div class="divider">在泉之气</div>';
+      html += renderJingwenBlock(zqjw.source, zqjw.classical, zqjw.modern);
+
+      html += '<div class="divider">二十四节气</div>';
+      html += '<div class="jieqi-grid">';
+      for (var j = 0; j < JIEQI_LIST.length; j++) {
+        var isCur = (curJq.name === JIEQI_LIST[j]);
+        html += '<div class="jieqi-item' + (isCur ? ' current' : '') + '">';
+        html += '<div class="jq-name">' + JIEQI_LIST[j] + '</div>';
+        html += '<div class="jq-date">' + (JIEQI_DATES[JIEQI_LIST[j]] || '') + '</div>';
+        html += '</div>';
+      }
+      html += '</div>';
+
+      var result = document.getElementById('year-result');
+      result.innerHTML = html;
+      result.classList.add('show');
+    } catch (e) {
+      console.error('年运查询错误:', e);
+      alert('查询出错：' + e.message);
+    }
+  };
+
+  // ===== 个人运气 =====
+  window.queryPersonal = function() {
+    try {
+      var year = parseInt(document.getElementById('birth-year').value);
+      var month = parseInt(document.getElementById('birth-month').value);
+      var day = parseInt(document.getElementById('birth-day').value);
+
+      if (isNaN(year) || isNaN(month) || isNaN(day)) { alert('请完整填写出生日期'); return; }
+
+      var gz = getGanZhi(year);
+      var yun = getYun(gz.gan);
+      var guo = getGuo(gz.gan);
+      var sz = getSiZai(gz.zhi);
+      var org = WUXING_ORG[yun];
+      var isGuo = (guo === '太过');
+      var diseaseLevel = isGuo ? 'high' : 'medium';
+
+      var isSiTian = (month >= 4 && month <= 8);
+      var nearQi = isSiTian ? sz.si : sz.zai;
+      var nearQiLabel = isSiTian ? '偏司天之气' : '偏在泉之气';
+
+      var html = '';
+      html += '<div class="result-header">';
+      html += '<div class="ganzhi">' + gz.full + '年出生</div>';
+      html += '<div class="year-label">公历 ' + year + '年' + month + '月' + day + '日 · 先天运气推算</div>';
+      html += '</div>';
+
+      html += '<div class="info-grid">';
+      html += '<div class="info-item"><div class="label">年干支</div><div class="value">' + gz.full + '</div></div>';
+      html += '<div class="info-item"><div class="label">大运</div><div class="value highlight">' + yun + '运 · ' + guo + '</div></div>';
+      html += '<div class="info-item"><div class="label">司天</div><div class="value">' + sz.si + '</div></div>';
+      html += '<div class="info-item"><div class="label">在泉</div><div class="value">' + sz.zai + '</div></div>';
+      html += '<div class="info-item"><div class="label">先天体质倾向</div><div class="value highlight" style="color:' + WUXING_COLORS[yun] + '">' + org.zang + '脏偏弱（' + yun + '）</div></div>';
+      html += '<div class="info-item"><div class="label">出生时近</div><div class="value">' + nearQi + '（' + nearQiLabel + '）</div></div>';
+      html += '</div>';
+
+      html += '<div class="divider">先天体质分析</div>';
+      var bj = BODY_JINGWEN[yun];
+      html += renderJingwenBlock(bj.source, bj.classical, bj.modern);
+
+      html += '<div class="divider">疾病易发倾向</div>';
+      html += '<div class="disease-card ' + diseaseLevel + '">';
+      html += '<div class="disease-title">⚑ 重点关注：' + org.zang + '系疾病（' + (diseaseLevel === 'high' ? '高风险' : '中等风险') + '）</div>';
+      html += '<p style="font-size:0.92rem;line-height:1.8;margin-top:6px;">' + getDiseaseDesc(yun, isGuo) + '</p>';
+      html += '</div>';
+
+      html += '<div class="disease-card medium">';
+      html += '<div class="disease-title">⚑ ' + org.zang + '之表里：' + org.fu + '及关联系统</div>';
+      html += '<p style="font-size:0.92rem;line-height:1.8;margin-top:6px;">' + getRelatedDisease(yun, isGuo) + '</p>';
+      html += '</div>';
+
+      html += '<div class="disease-card low">';
+      html += '<div class="disease-title">⚑ 养生建议</div>';
+      html += '<p style="font-size:0.92rem;line-height:1.8;margin-top:6px;">' + getHealthAdvice(yun, isGuo) + '</p>';
+      html += '</div>';
+
+      var result = document.getElementById('personal-result');
+      result.innerHTML = html;
+      result.classList.add('show');
+    } catch (e) {
+      console.error('个人运气查询错误:', e);
+      alert('查询出错：' + e.message);
+    }
+  };
+
+  function getDiseaseDesc(yun, isGuo) {
+    var descs = {
+      '木': isGuo
+        ? '木运太过，肝气偏旺。易患肝阳上亢、头痛眩晕、目赤肿痛、急躁易怒、胁肋胀痛等肝经实热证。春季尤需注意，可能诱发中风、高血压等。'
+        : '木运不及，肝气偏弱。易患肝血不足、目眩眼花、筋脉拘急、胸胁隐痛、情绪抑郁等肝经虚证。春季需注意防风邪侵袭，防肝气郁结。',
+      '火': isGuo
+        ? '火运太过，心火偏旺。易患心烦失眠、口舌生疮、心悸胸闷、面赤口渴、小便短赤等心经实热证。夏季尤需注意，可能诱发心血管疾病急性发作。'
+        : '火运不及，心阳不足。易患心悸怔忡、畏寒肢冷、胸痹心痛、面色苍白、气短乏力等心阳虚证。冬季需注意保暖，防范心脑血管疾病。',
+      '土': isGuo
+        ? '土运太过，湿气偏重。易患脘腹胀满、食欲不振、大便溏泄、肢体困重、痰饮水肿等脾湿证。长夏季节尤需注意，可能加重消化系统负担。'
+        : '土运不及，脾气虚弱。易患消化不良、腹泻便溏、面色萎黄、四肢无力、消瘦或虚胖等脾虚证。需注意饮食调养，避免生冷油腻之物。',
+      '金': isGuo
+        ? '金运太过，燥气偏盛。易患干咳少痰、咽干鼻燥、皮肤干裂、大便干结、易感冒等肺燥证。秋季尤需注意，可能诱发呼吸道疾病。'
+        : '金运不及，肺气偏弱。易患咳嗽气喘、自汗畏风、声音低微、易感冒、皮肤不固等肺气虚证。需注意呼吸系统的日常保养，适当锻炼肺功能。',
+      '水': isGuo
+        ? '水运太过，寒气偏盛。易患腰膝冷痛、畏寒肢冷、小便清长、水肿、遗精早泄等肾阳虚证。冬季尤需注意，可能加重骨关节疾病。'
+        : '水运不及，肾阴不足。易患腰膝酸软、眩晕耳鸣、五心烦热、盗汗、失眠多梦等肾阴虚证。需注意节制房事，避免过度劳累伤肾。'
+    };
+    return descs[yun];
+  }
+
+  function getRelatedDisease(yun, isGuo) {
+    var relations = {
+      '木': '肝木克脾土，脾胃功能亦易受影响，可能出现消化功能紊乱。肝主筋，注意关节筋骨问题。',
+      '火': '心火与肾水相济，肾水可能受克，注意泌尿生殖系统。心主血脉，需注意血液循环问题。',
+      '土': '脾土生肺金，肺可能受累，注意呼吸系统。脾主运化水湿，水湿停聚则生痰饮。',
+      '金': '肺金生肾水，肾可能偏旺或偏弱。肺主皮毛，注意皮肤问题及免疫力。',
+      '水': '肾水生肝木，肝可能偏旺。肾主骨生髓，注意骨骼、牙齿、头发等方面。'
+    };
+    return relations[yun];
+  }
+
+  function getHealthAdvice(yun, isGuo) {
+    var advice = {
+      '木': '宜养肝疏泄。饮食宜酸甘（酸入肝），多食绿色蔬菜。情志宜畅达，戒怒戒郁。春季宜早起活动，舒展筋骨。可按摩太冲、期门等穴位。',
+      '火': '宜养心安神。饮食宜苦味（苦入心），适量食用红色食物。情志宜平和，戒大喜大悲。夏季宜午间小憩，避免烈日暴晒。可按摩内关、神门等穴位。',
+      '土': '宜健脾化湿。饮食宜甘淡（甘入脾），少食肥甘厚腻。情志宜宽和，减少过度思虑。长夏季节注意防潮。可按摩足三里、中脘等穴位。',
+      '金': '宜润肺清燥。饮食宜辛润（辛入肺），多食白色食物如梨、百合、银耳。情志宜豁达，戒悲忧。秋季注意保暖防燥。可按摩太渊、列缺等穴位。',
+      '水': '宜补肾益精。饮食宜咸润（咸入肾），适量食用黑色食物如黑芝麻、黑豆。情志宜宁静，戒恐惧。冬季宜早睡晚起，注意保暖。可按摩太溪、肾俞等穴位。'
+    };
+    return advice[yun];
+  }
+
+  // ===== 天气灾害 =====
+  window.queryWeather = function() {
+    try {
+      var yearInput = document.getElementById('weather-year');
+      if (!yearInput) { alert('页面元素未找到，请刷新页面'); return; }
+      var year = parseInt(yearInput.value);
+      if (isNaN(year) || year < 1) { alert('请输入有效年份'); return; }
+
+      var gz = getGanZhi(year);
+      var yun = getYun(gz.gan);
+      var guo = getGuo(gz.gan);
+      var yunKey = yun + '运' + (guo === '不及' ? '不及' : '');
+      var sz = getSiZai(gz.zhi);
+
+      console.log('[debug] 年=' + year + ', 干支=' + gz.full + ', 运=' + yun + ', 太过/不及=' + guo + ', yunKey=' + yunKey);
+
+      var wp = WEATHER_PREDICTION[yunKey];
+      if (!wp) {
+        alert('未找到对应的天气预测数据（键值=' + yunKey + '），请尝试其他年份。');
+        return;
+      }
+
+      var html = '';
+      html += '<div class="result-header">';
+      html += '<div class="ganzhi">' + gz.full + '年 · 气候推演</div>';
+      html += '<div class="year-label">' + year + ' 年五运六气灾害预测</div>';
+      html += '</div>';
+
+      html += '<div class="info-grid">';
+      html += '<div class="info-item"><div class="label">大运</div><div class="value highlight">' + yun + '运 · ' + guo + '</div></div>';
+      html += '<div class="info-item"><div class="label">司天</div><div class="value">' + sz.si + '</div></div>';
+      html += '<div class="info-item"><div class="label">在泉</div><div class="value">' + sz.zai + '</div></div>';
+      html += '</div>';
+
+      html += '<div class="divider">全年气候总势</div>';
+      html += '<p style="text-align:center;font-size:0.95rem;line-height:1.9;margin-bottom:20px;">' + wp.overall + '</p>';
+
+      html += '<div class="divider">灾害预测详情</div>';
+      for (var i = 0; i < wp.disasters.length; i++) {
+        var d = wp.disasters[i];
+        html += '<div class="disaster-item">';
+        html += '<div class="disaster-type">⚠ ' + d.type + '</div>';
+        html += '<div class="disaster-desc">' + d.desc + '</div>';
+        html += '</div>';
+      }
+
+      html += '<div class="divider">经典依据</div>';
+      html += renderJingwenBlock(wp.source, '', wp.modern);
+
+      html += '<div class="divider">司天在泉气候影响</div>';
+      html += '<p style="font-size:0.92rem;line-height:1.9;margin-bottom:16px;">';
+      html += '<strong style="color:var(--ink-light);">司天（' + sz.si + '）影响上半年：</strong>';
+      html += getSiTianWeather(sz.si);
+      html += '</p>';
+      html += '<p style="font-size:0.92rem;line-height:1.9;margin-bottom:16px;">';
+      html += '<strong style="color:var(--ink-light);">在泉（' + sz.zai + '）影响下半年：</strong>';
+      html += getZaiQuanWeather(sz.zai);
+      html += '</p>';
+
+      html += '<div style="margin-top:24px;padding:16px;background:rgba(194,59,39,0.04);border:1px dashed var(--red-seal);border-radius:3px;">';
+      html += '<p style="font-size:0.82rem;color:var(--ink-faint);text-align:center;line-height:1.8;">';
+      html += '⚠ 以上预测基于《黄帝内经》五运六气理论推演，属传统中医学说范畴，<br>';
+      html += '仅供学习研究和文化参考，不作为现代气象学预测依据。';
+      html += '</p></div>';
+
+      var resultEl = document.getElementById('weather-result');
+      if (!resultEl) { alert('结果容器未找到，请刷新页面'); return; }
+      resultEl.innerHTML = html;
+      resultEl.classList.add('show');
+    } catch (e) {
+      console.error('天气预测错误:', e);
+      alert('推演出错：' + e.message);
+    }
+  };
+
+  function getSiTianWeather(si) {
+    var weathers = {
+      '少阴君火': '上半年偏热，气温偏高，春夏可能出现异常高温天气。心火当令，需注意防暑降温。',
+      '太阴湿土': '上半年偏湿，降雨偏多，湿度较大。春夏可能出现连阴雨天气，需注意防涝防潮。',
+      '少阳相火': '上半年火气偏盛，气温偏高，可能出现热浪。春末夏初需防范高温及强对流天气。',
+      '阳明燥金': '上半年偏燥，空气干燥，降水偏少。春季可能出现春旱，需注意防火及呼吸道防护。',
+      '太阳寒水': '上半年偏寒，气温偏低，可能出现倒春寒。春季回暖较慢，需注意防寒保暖。',
+      '厥阴风木': '上半年风大，气流不稳，天气多变。春季多风，可能出现大风、沙尘天气，气温波动大。'
+    };
+    return weathers[si] || '待补充';
+  }
+
+  function getZaiQuanWeather(zai) {
+    var weathers = {
+      '阳明燥金': '下半年偏燥，秋季干燥明显，降水偏少。需注意秋旱及防火。',
+      '太阳寒水': '下半年偏寒，冬季严寒，可能出现极端低温。需注意防寒防冻。',
+      '厥阴风木': '下半年风气偏盛，秋季多风，天气变化频繁。需注意防风及气温骤变。',
+      '少阴君火': '下半年偏热，冬季可能偏暖（暖冬）。需注意暖冬对农业的影响。',
+      '太阴湿土': '下半年偏湿，秋雨较多，可能出现秋涝。需注意防涝防潮。',
+      '少阳相火': '下半年火气仍存，秋老虎明显，气温偏高。需注意防暑及抗旱。'
+    };
+    return weathers[zai] || '待补充';
+  }
+
+  // ===== 标签切换 =====
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.getAttribute('data-tab')).classList.add('active');
+    });
+  });
+
+  // ===== 初始化日期下拉 =====
+  var sel = document.getElementById('birth-day');
+  for (var d = 1; d <= 31; d++) {
+    var opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d + '日';
+    sel.appendChild(opt);
+  }
+  sel.value = 15;
+
+  // ===== 页面加载后自动查询当年 =====
+  window.addEventListener('DOMContentLoaded', function() {
+    queryYear();
+  });
+
+})();
+</script>
+</body>
+</html>
