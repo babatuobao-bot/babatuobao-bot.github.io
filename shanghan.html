@@ -46,7 +46,7 @@ body{font-family:-apple-system,"Noto Sans SC","PingFang SC","Hiragino Sans GB","
 .card h3{font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
 .card p{font-size:13px;color:var(--text-secondary);margin-bottom:4px}
 .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:3px;color:#fff;font-weight:500}
-.tag-太阳{background:var(--tag-sun)}.tag-阳明{background:var(--tag-yangming)}.tag-少阳{background:var(--tag-shaoyang)}.tag-太阴{background:var(--tag-taiyin)}.tag-少阴{background:var(--tag-shaoyin)}.tag-厥阴{background:var(--tag-jueyin)}.tag-type{background:var(--accent-bg);color:var(--accent)}
+.tag-太阳{background:var(--tag-sun)}.tag-阳明{background:var(--tag-yangming)}.tag-少阳{background:var(--tag-shaoyang)}.tag-太阴{background:var(--tag-taiyin)}.tag-少阴{background:var(--tag-shaoyin)}.tag-厥阴{background:var(--tag-jueyin)}.tag-金匮{background:#5b8c5a}.tag-type{background:var(--accent-bg);color:var(--accent)}
 .detail-header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
 .back-btn{padding:6px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all .2s}
 .back-btn:hover{border-color:var(--accent);color:var(--accent)}
@@ -68,11 +68,11 @@ td{font-size:13px}
 tr:hover td{background:var(--accent-bg)}
 .link-chip{display:inline-block;padding:3px 10px;margin:2px 4px 2px 0;background:var(--accent-bg);border:1px solid var(--border);border-radius:14px;font-size:12px;color:var(--accent);cursor:pointer;transition:all .2s}
 .link-chip:hover{background:var(--accent);color:#fff}
-.meridian-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px}
+.meridian-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:24px}
 .meridian-card{text-align:center;padding:20px 12px;border-radius:var(--radius-lg);cursor:pointer;transition:all .2s;color:#fff;font-weight:600;font-size:16px}
 .meridian-card:hover{transform:scale(1.03);box-shadow:var(--shadow-md)}
 .meridian-card small{display:block;font-size:12px;font-weight:400;opacity:.85;margin-top:4px}
-.m-太阳{background:linear-gradient(135deg,#e8913a,#f0a858)}.m-阳明{background:linear-gradient(135deg,#d94f3d,#e87060)}.m-少阳{background:linear-gradient(135deg,#4a9c5d,#65b878)}.m-太阴{background:linear-gradient(135deg,#3a8fb7,#58a8cc)}.m-少阴{background:linear-gradient(135deg,#7b68a8,#9685be)}.m-厥阴{background:linear-gradient(135deg,#c44d8b,#d86ea8)}
+.m-太阳{background:linear-gradient(135deg,#e8913a,#f0a858)}.m-阳明{background:linear-gradient(135deg,#d94f3d,#e87060)}.m-少阳{background:linear-gradient(135deg,#4a9c5d,#65b878)}.m-太阴{background:linear-gradient(135deg,#3a8fb7,#58a8cc)}.m-少阴{background:linear-gradient(135deg,#7b68a8,#9685be)}.m-厥阴{background:linear-gradient(135deg,#c44d8b,#d86ea8)}.m-金匮{background:linear-gradient(135deg,#5b8c5a,#7aad78)}
 @media(max-width:640px){.header-inner{flex-wrap:wrap}.search-box{order:3;max-width:100%;flex-basis:100%}.hero h2{font-size:22px}.cards-grid{grid-template-columns:1fr}.detail-content{padding:16px}.flow-diagram{flex-direction:column}.flow-arrow{transform:rotate(90deg)}.meridian-cards{grid-template-columns:repeat(2,1fr)}}
 .breadcrumb{font-size:13px;color:var(--text-secondary);margin-bottom:16px}
 .breadcrumb span{cursor:pointer;color:var(--accent)}
@@ -103,7 +103,7 @@ tr:hover td{background:var(--accent-bg)}
 <div class="header"><div class="header-inner"><h1 onclick="showPage('home')">📚 伤寒论</h1><div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="搜索证候、方剂、症状…" oninput="handleSearch(this.value)"><div class="search-results" id="searchResults"></div></div></div></div>
 <nav class="nav"><div class="nav-inner"><div class="nav-tab active" data-page="home">🏠 首页</div><div class="nav-tab" data-page="checker">🩺 症状查询</div><div class="nav-tab" data-page="syndromes">📋 证候</div><div class="nav-tab" data-page="formulas">💊 方剂</div><div class="nav-tab" data-page="symptoms">🔤 症状</div></div></nav>
 <main class="main">
-<div class="page active" id="page-home"><div class="hero"><h2>伤寒论知识查询系统</h2><p>东汉·张仲景 著 — 六经辨证 · 有是证用是方</p><div class="quote">"观其脉证，知犯何逆，随证治之。"</div><div class="flow-diagram"><div class="flow-item">🔤 症状</div><div class="flow-arrow">→</div><div class="flow-item">📋 证候</div><div class="flow-arrow">→</div><div class="flow-item">💊 方剂</div><div class="flow-arrow">→</div><div class="flow-item">📜 原文</div></div></div><div class="section-title">六经辨证</div><div class="meridian-cards" id="meridianCards"></div><div class="section-title">快速入门</div><div class="cards-grid"><div class="card" onclick="showPage('checker')"><h3>🩺 按症状查方</h3><p>选择你有的症状，自动匹配证候与方剂</p></div><div class="card" onclick="showPage('syndromes')"><h3>📋 浏览全部证候</h3><p>按六经分类，查看全部证候详情</p></div><div class="card" onclick="showPage('formulas')"><h3>💊 方剂速查</h3><p>组成、用量、功效、主治、禁忌一览</p></div><div class="card" onclick="showPage('symptoms')"><h3>🔤 症状对照表</h3><p>每个症状在六经中的不同表现与对应方剂</p></div></div></div>
+<div class="page active" id="page-home"><div class="hero"><h2>伤寒论 · 金匮要略</h2><p>东汉·张仲景 著 — 六经辨证 · 杂病论治 · 有是证用是方</p><div class="quote">"观其脉证，知犯何逆，随证治之。"<br><span style="font-size:13px;color:var(--text-secondary)">"夫治未病者，见肝之病，知肝传脾，当先实脾。"</span></div><div class="flow-diagram"><div class="flow-item">🔤 症状</div><div class="flow-arrow">→</div><div class="flow-item">📋 证候</div><div class="flow-arrow">→</div><div class="flow-item">💊 方剂</div><div class="flow-arrow">→</div><div class="flow-item">📜 原文</div></div></div><div class="section-title">六经辨证</div><div class="meridian-cards" id="meridianCards"></div><div class="section-title">快速入门</div><div class="cards-grid"><div class="card" onclick="showPage('checker')"><h3>🩺 按症状查方</h3><p>选择你有的症状，自动匹配证候与方剂</p></div><div class="card" onclick="showPage('syndromes')"><h3>📋 浏览全部证候</h3><p>按六经分类，查看全部证候详情</p></div><div class="card" onclick="showPage('formulas')"><h3>💊 方剂速查</h3><p>组成、用量、功效、主治、禁忌一览</p></div><div class="card" onclick="showPage('symptoms')"><h3>🔤 症状对照表</h3><p>每个症状在六经中的不同表现与对应方剂</p></div></div></div>
 <div class="page" id="page-checker"><div class="breadcrumb"><span onclick="showPage('home')">首页</span> / 症状查询</div><div class="checker"><h3>🩺 症状组合查询</h3><p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">点击选择症状，系统自动匹配可能的证候与方剂</p><div class="symptom-selector" id="symptomSelector"></div><div class="checker-result" id="checkerResult"></div></div></div>
 <div class="page" id="page-syndromes"><div class="breadcrumb"><span onclick="showPage('home')">首页</span> / 证候</div><div id="syndromesList"></div><div id="syndromeDetail" style="display:none"></div></div>
 <div class="page" id="page-formulas"><div class="breadcrumb"><span onclick="showPage('home')">首页</span> / 方剂</div><div id="formulasList"></div><div id="formulaDetail" style="display:none"></div></div>
@@ -115,7 +115,29 @@ tr:hover td{background:var(--accent-bg)}
 // 鸡子大≈40克，一钱匕≈1.5~2克，等分≈2~3克
 
 const DATA = {
-meridians:[{name:"太阳",desc:"表证·初期",color:"太阳"},{name:"阳明",desc:"里热·极期",color:"阳明"},{name:"少阳",desc:"半表半里",color:"少阳"},{name:"太阴",desc:"脾虚寒",color:"太阴"},{name:"少阴",desc:"心肾阳衰",color:"少阴"},{name:"厥阴",desc:"寒热错杂",color:"厥阴"}],
+meridians:[
+{name:"太阳",desc:"表证·初期",color:"太阳"},
+{name:"阳明",desc:"里热·极期",color:"阳明"},
+{name:"少阳",desc:"半表半里",color:"少阳"},
+{name:"太阴",desc:"脾虚寒",color:"太阴"},
+{name:"少阴",desc:"心肾阳衰",color:"少阴"},
+{name:"厥阴",desc:"寒热错杂",color:"厥阴"},
+{name:"金匮·痰饮",desc:"痰饮停聚",color:"金匮"},
+{name:"金匮·水气",desc:"水气泛溢",color:"金匮"},
+{name:"金匮·黄疸",desc:"湿热发黄",color:"金匮"},
+{name:"金匮·胸痹",desc:"胸阳痹阻",color:"金匮"},
+{name:"金匮·血痹",desc:"血行涩滞",color:"金匮"},
+{name:"金匮·虚劳",desc:"气血阴阳虚损",color:"金匮"},
+{name:"金匮·奔豚",desc:"冲气上逆",color:"金匮"},
+{name:"金匮·肺痿",desc:"肺气虚冷",color:"金匮"},
+{name:"金匮·肺痈",desc:"热毒壅肺",color:"金匮"},
+{name:"金匮·呕吐",desc:"胃虚气逆",color:"金匮"},
+{name:"金匮·妇人",desc:"妇人杂病",color:"金匮"},
+{name:"金匮·寒疝",desc:"血虚寒凝",color:"金匮"},
+{name:"金匮·百合",desc:"心肺阴虚",color:"金匮"},
+{name:"金匮·疮痈",desc:"热毒蕴结",color:"金匮"},
+{name:"金匮·消渴",desc:"肾阳不足",color:"金匮"}
+],
 
 syndromes:[
 {id:"太阳中风证",meridian:"太阳",formula:"桂枝汤",article:"辨太阳病脉证并治上·第12条",main:["发热（翕翕发热）","汗出","恶风","脉浮缓"],secondary:["鼻鸣","干呕","头痛","项强"],mechanism:"风邪袭表，卫强营弱，营卫不和。",key:"发热、汗出、恶风、脉浮缓",differentiate:[["太阳伤寒证","有汗 vs 无汗"],["温病","表虚 vs 里热"]],variants:[["兼项背强几几","太阳中风兼经输不利证","桂枝加葛根汤"],["兼喘","太阳中风兼喘证","桂枝加厚朴杏子汤"],["发汗太过阳虚","太阳病发汗太过阳虚证","桂枝加附子汤"]],articles:[{text:"太阳中风，阳浮而阴弱，阳浮者热自发，阴弱者汗自出，啬啬恶寒，淅淅恶风，翕翕发热，鼻鸣干呕者，桂枝汤主之。",source:"辨太阳病脉证并治上·第12条"},{text:"太阳病，头痛，发热，汗出，恶风者，桂枝汤主之。",source:"辨太阳病脉证并治上·第13条"}]},
@@ -153,6 +175,33 @@ syndromes:[
 {id:"太阳少阳并病证",meridian:"少阳",formula:"柴胡桂枝汤",article:"辨少阳病脉证并治·第146条",main:["发热微恶寒","支节烦疼","微呕","心下支结"],secondary:[],mechanism:"太阳表证未解，邪入少阳。",key:"表证（发热恶寒）+ 少阳证（微呕、心下支结）",differentiate:[],variants:[],articles:[{text:"伤寒六七日，发热微恶寒，支节烦疼，微呕，心下支结，外证未去者，柴胡桂枝汤主之。",source:"辨少阳病脉证并治·第146条"}]},
 {id:"少阳兼水饮证",meridian:"少阳",formula:"柴胡桂枝干姜汤",article:"辨少阳病脉证并治·第147条",main:["胸胁满微结","小便不利","渴而不呕","但头汗出","往来寒热","心烦"],secondary:[],mechanism:"少阳枢机不利，兼水饮内停。",key:"少阳证 + 小便不利 + 渴",differentiate:[],variants:[],articles:[{text:"伤寒五六日，已发汗而复下之，胸胁满微结，小便不利，渴而不呕，但头汗出，往来寒热，心烦者，此为未解也，柴胡桂枝干姜汤主之。",source:"辨少阳病脉证并治·第147条"}]},
 {id:"上热下寒证",meridian:"少阳",formula:"黄连汤",article:"辨少阳病脉证并治·第173条",main:["腹中痛","欲呕吐"],secondary:[],mechanism:"胸中有热，胃中有寒，上下不和。",key:"腹中痛 + 欲呕吐（上热下寒并见）",differentiate:[],variants:[],articles:[{text:"伤寒胸中有热，胃中有邪气，腹中痛，欲呕吐者，黄连汤主之。",source:"辨少阳病脉证并治·第173条"}]}
+,
+{id:"痰饮病",meridian:"金匮·痰饮",formula:"苓桂术甘汤",article:"痰饮咳嗽病脉证并治第十二",main:["心下逆满","气上冲胸","头眩","心悸","短气"],secondary:["咳嗽","呕恶"],mechanism:"脾虚水停，饮停心下。",key:"心下逆满 + 气上冲胸 + 头眩 + 心悸",differentiate:[["水气病","饮停心下 vs 水泛肌肤"],["外寒内饮证","无表证 vs 有表证"]],variants:[],articles:[{text:"心下有痰饮，胸胁支满，目眩，苓桂术甘汤主之。",source:"痰饮咳嗽病脉证并治第十二"},{text:"夫短气有微饮，当从小便去之，苓桂术甘汤主之。",source:"痰饮咳嗽病脉证并治第十二"}]},
+{id:"支饮",meridian:"金匮·痰饮",formula:"小青龙汤",article:"痰饮咳嗽病脉证并治第十二",main:["咳逆倚息不得卧","短气","不得平卧"],secondary:["形如肿"],mechanism:"水饮停聚胸膈，肺气不利。",key:"咳逆倚息不得卧",differentiate:[["外寒内饮证","有表证 vs 无表证"]],variants:[],articles:[{text:"咳逆倚息不得卧，小青龙汤主之。",source:"痰饮咳嗽病脉证并治第十二"}]},
+{id:"悬饮（金匮）",meridian:"金匮·痰饮",formula:"十枣汤",article:"痰饮咳嗽病脉证并治第十二",main:["饮后水流在胁下","咳唾引痛"],secondary:[],mechanism:"饮停胁下。",key:"咳唾引痛",differentiate:[],variants:[],articles:[{text:"饮后水流在胁下，咳唾引痛，谓之悬饮。",source:"痰饮咳嗽病脉证并治第十二"}]},
+{id:"水气病",meridian:"金匮·水气",formula:"防己黄芪汤",article:"水气病脉证并治第十四",main:["风水","脉浮","身重","汗出恶风"],secondary:[],mechanism:"表虚风水，水湿泛溢肌肤。",key:"脉浮 + 身重 + 汗出恶风",differentiate:[["痰饮病","水泛肌肤 vs 饮停脏腑"]],variants:[],articles:[{text:"风水，脉浮身重，汗出恶风者，防己黄芪汤主之。",source:"水气病脉证并治第十四"}]},
+{id:"皮水",meridian:"金匮·水气",formula:"越婢加术汤",article:"水气病脉证并治第十四",main:["四肢肿","水气在皮肤中","聂聂动"],secondary:[],mechanism:"水气停留皮肤之间。",key:"四肢肿，水气在皮肤中",differentiate:[],variants:[],articles:[{text:"里水者，一身面目黄肿，其脉沉，小便不利，故令病水。",source:"水气病脉证并治第十四"}]},
+{id:"谷疸",meridian:"金匮·黄疸",formula:"茵陈蒿汤",article:"黄疸病脉证并治第十五",main:["身黄如橘子色","小便不利","腹微满","但头汗出"],secondary:["渴饮水浆","身黄"],mechanism:"湿热蕴结中焦，胆汁外溢。",key:"身黄如橘子色 + 小便不利 + 腹微满",differentiate:[["黄疸（寒湿）","鲜明如橘 vs 晦暗如烟熏"]],variants:[],articles:[{text:"谷疸之为病，寒热不食，食即头眩，心胸不安，久久发黄为谷疸，茵陈蒿汤主之。",source:"黄疸病脉证并治第十五"}]},
+{id:"黄疸（寒湿）",meridian:"金匮·黄疸",formula:"茵陈五苓散",article:"黄疸病脉证并治第十五",main:["身黄晦暗","小便不利"],secondary:[],mechanism:"寒湿内阻，胆汁不循常道。",key:"身黄晦暗",differentiate:[["谷疸","晦暗如烟熏 vs 鲜明如橘"]],variants:[],articles:[{text:"黄疸病，茵陈五苓散主之。",source:"黄疸病脉证并治第十五"}]},
+{id:"胸痹",meridian:"金匮·胸痹",formula:"栝楼薤白白酒汤",article:"胸痹心痛短气病脉证治第九",main:["胸背痛","短气","喘息咳唾"],secondary:[],mechanism:"胸阳不振，痰浊痹阻。",key:"胸背痛 + 短气",differentiate:[["心痛","胸痛 vs 心下痛"]],variants:[],articles:[{text:"胸痹之病，喘息咳唾，胸背痛，短气，寸口脉沉而迟，关上小紧数，栝楼薤白白酒汤主之。",source:"胸痹心痛短气病脉证治第九"}]},
+{id:"胸痹重症",meridian:"金匮·胸痹",formula:"栝楼薤白半夏汤",article:"胸痹心痛短气病脉证治第九",main:["胸痹不得卧","心痛彻背"],secondary:[],mechanism:"痰浊壅盛，胸阳痹阻。",key:"胸痹不得卧 + 心痛彻背",differentiate:[],variants:[],articles:[{text:"胸痹不得卧，心痛彻背者，栝楼薤白半夏汤主之。",source:"胸痹心痛短气病脉证治第九"}]},
+{id:"血痹",meridian:"金匮·血痹",formula:"黄芪桂枝五物汤",article:"血痹虚劳病脉证并治第六",main:["身体不仁","如风痹状","脉微涩"],secondary:[],mechanism:"气血不足，风寒侵袭，血行涩滞。",key:"身体不仁",differentiate:[],variants:[],articles:[{text:"血痹阴阳俱微……外证身体不仁，如风痹状，黄芪桂枝五物汤主之。",source:"血痹虚劳病脉证并治第六"}]},
+{id:"虚劳",meridian:"金匮·虚劳",formula:"小建中汤",article:"血痹虚劳病脉证并治第六",main:["虚劳里急","悸","衄","腹中痛","梦失精","四肢酸疼","手足烦热","咽干口燥"],secondary:[],mechanism:"阴阳两虚，脾胃虚弱。",key:"虚劳里急 + 腹中痛",differentiate:[],variants:[],articles:[{text:"虚劳里急，悸，衄，腹中痛，梦失精，四肢酸疼，手足烦热，咽干口燥，小建中汤主之。",source:"血痹虚劳病脉证并治第六"}]},
+{id:"虚劳失眠",meridian:"金匮·虚劳",formula:"酸枣仁汤",article:"血痹虚劳病脉证并治第六",main:["虚烦不得眠"],secondary:[],mechanism:"肝血不足，虚热内扰。",key:"虚烦不得眠",differentiate:[["少阴阴虚火旺证","肝血虚 vs 肾阴虚"]],variants:[],articles:[{text:"虚劳虚烦不得眠，酸枣仁汤主之。",source:"血痹虚劳病脉证并治第六"}]},
+{id:"肾气虚",meridian:"金匮·虚劳",formula:"肾气丸",article:"血痹虚劳病脉证并治第六",main:["虚劳腰痛","少腹拘急","小便不利"],secondary:[],mechanism:"肾气不足，膀胱气化不利。",key:"虚劳腰痛 + 少腹拘急 + 小便不利",differentiate:[["阳虚水泛证","肾气虚 vs 阳虚水泛"]],variants:[],articles:[{text:"虚劳腰痛，少腹拘急，小便不利者，八味肾气丸主之。",source:"血痹虚劳病脉证并治第六"}]},
+{id:"奔豚气",meridian:"金匮·奔豚",formula:"奔豚汤",article:"奔豚气病脉证治第八",main:["气从少腹上冲咽喉","发作欲死","复还止"],secondary:["腹痛","往来寒热"],mechanism:"肝气上逆，冲气上冲。",key:"气从少腹上冲咽喉",differentiate:[],variants:[],articles:[{text:"奔豚病，从少腹起，上冲咽喉，发作欲死，复还止，皆从惊恐得之。",source:"奔豚气病脉证治第八"},{text:"奔豚气上冲胸，腹痛，往来寒热，奔豚汤主之。",source:"奔豚气病脉证治第八"}]},
+{id:"肺痿",meridian:"金匮·肺痿",formula:"甘草干姜汤",article:"肺痿肺痈咳嗽上气病脉证治第七",main:["咳唾涎沫","其人数唾","小便数"],secondary:["不渴","必遗尿"],mechanism:"肺气虚冷，津液不布。",key:"咳唾涎沫 + 小便数",differentiate:[["肺痈","咳唾涎沫 vs 咳吐脓血"]],variants:[],articles:[{text:"肺痿吐涎沫而不咳者，其人不渴，必遗尿，小便数。所以然者，以上虚不能制下故也。此为肺中冷，必眩，多涎唾，甘草干姜汤以温之。",source:"肺痿肺痈咳嗽上气病脉证治第七"}]},
+{id:"肺痈",meridian:"金匮·肺痈",formula:"千金苇茎汤",article:"肺痿肺痈咳嗽上气病脉证治第七",main:["咳吐脓血","胸中满痛"],secondary:["口干喘满","咽燥不渴"],mechanism:"热毒壅肺，血败肉腐。",key:"咳吐脓血 + 胸中满痛",differentiate:[],variants:[],articles:[{text:"咳而胸满，振寒脉数，咽干不渴，时出浊唾腥臭，久久吐脓如米粥者，为肺痈。",source:"肺痿肺痈咳嗽上气病脉证治第七"}]},
+{id:"胃反呕吐",meridian:"金匮·呕吐",formula:"大半夏汤",article:"呕吐哕下利病脉证治第十七",main:["朝食暮吐","暮食朝吐","宿谷不化"],secondary:[],mechanism:"胃虚气逆。",key:"朝食暮吐，暮食朝吐",differentiate:[],variants:[],articles:[{text:"胃反呕吐者，大半夏汤主之。",source:"呕吐哕下利病脉证治第十七"}]},
+{id:"脏躁",meridian:"金匮·妇人杂病",formula:"甘麦大枣汤",article:"妇人杂病脉证并治第二十二",main:["喜悲伤欲哭","象如神灵所作","数欠伸"],secondary:[],mechanism:"心脾两虚，脏阴不足。",key:"喜悲伤欲哭 + 象如神灵所作 + 数欠伸",differentiate:[],variants:[],articles:[{text:"妇人脏躁，喜悲伤欲哭，象如神灵所作，数欠伸，甘麦大枣汤主之。",source:"妇人杂病脉证并治第二十二"}]},
+{id:"梅核气",meridian:"金匮·妇人杂病",formula:"半夏厚朴汤",article:"妇人杂病脉证并治第二十二",main:["咽中如有炙脔"],secondary:[],mechanism:"气郁痰凝，结于咽喉。",key:"咽中如有炙脔",differentiate:[],variants:[],articles:[{text:"妇人咽中如有炙脔，半夏厚朴汤主之。",source:"妇人杂病脉证并治第二十二"}]},
+{id:"妇人癥病",meridian:"金匮·妇人妊娠",formula:"桂枝茯苓丸",article:"妇人妊娠病脉证并治第二十",main:["宿有癥病","漏下"],secondary:["胎动在上"],mechanism:"瘀血内阻，癥积不去。",key:"宿有癥病 + 漏下",differentiate:[],variants:[],articles:[{text:"妇人宿有癥病，经断未及三月，而得漏下不止，胎动在脐上者，为癥痼害。……当下其癥，桂枝茯苓丸主之。",source:"妇人妊娠病脉证并治第二十"}]},
+{id:"妇人腹痛",meridian:"金匮·妇人妊娠",formula:"当归芍药散",article:"妇人妊娠病脉证并治第二十",main:["腹中疞痛"],secondary:["小便不利"],mechanism:"肝脾不和，血虚湿阻。",key:"腹中疞痛",differentiate:[],variants:[],articles:[{text:"妇人怀娠，腹中疞痛，当归芍药散主之。",source:"妇人妊娠病脉证并治第二十"}]},
+{id:"冲任虚寒",meridian:"金匮·妇人杂病",formula:"温经汤",article:"妇人杂病脉证并治第二十二",main:["少腹里急","腹满","暮即发热","手掌烦热","唇口干燥"],secondary:["曾经半产","瘀血在少腹不去"],mechanism:"冲任虚寒，瘀血内停。",key:"少腹里急 + 暮即发热 + 手掌烦热 + 唇口干燥",differentiate:[],variants:[],articles:[{text:"问曰：妇人年五十所，病下利数十日不止，暮即发热，少腹里急，腹满，手掌烦热，唇口干燥，何也？……曾经半产，瘀血在少腹不去。……当以温经汤主之。",source:"妇人杂病脉证并治第二十二"}]},
+{id:"寒疝",meridian:"金匮·寒疝",formula:"当归生姜羊肉汤",article:"腹满寒疝宿食病脉证治第十",main:["寒疝腹中痛","及胁痛里急"],secondary:[],mechanism:"血虚寒凝，肝脉失养。",key:"寒疝腹中痛 + 胁痛里急",differentiate:[],variants:[],articles:[{text:"寒疝腹中痛，及胁痛里急者，当归生姜羊肉汤主之。",source:"腹满寒疝宿食病脉证治第十"}]},
+{id:"百合病",meridian:"金匮·百合",formula:"百合地黄汤",article:"百合狐惑阴阳毒病脉证治第三",main:["意欲食复不能食","常默默","欲卧不能卧","欲行不能行","饮食或有美时","或有不用闻食臭时","如寒无寒","如热无热","口苦","小便赤","脉微数"],secondary:[],mechanism:"心肺阴虚，百脉受病。",key:"意欲食复不能食 + 常默默 + 如寒无寒，如热无热",differentiate:[],variants:[],articles:[{text:"百合病者，百脉一宗，悉致其病也。意欲食复不能食，常默默，欲卧不能卧，欲行不能行，饮食或有美时，或有不用闻食臭时，如寒无寒，如热无热，口苦，小便赤，诸药不能治，得药则剧吐利，如有神灵者，身形如和，其脉微数。",source:"百合狐惑阴阳毒病脉证治第三"}]},
+{id:"肠痈",meridian:"金匮·疮痈",formula:"大黄牡丹汤",article:"疮痈肠痈浸淫病脉证并治第十八",main:["少腹肿痞","按之即痛如淋","小便自调","时时发热","自汗出","复恶寒"],secondary:[],mechanism:"热毒内结，瘀热壅滞肠中。",key:"少腹肿痞 + 按之即痛 + 时时发热",differentiate:[],variants:[],articles:[{text:"肠痈者，少腹肿痞，按之即痛如淋，小便自调，时时发热，自汗出，复恶寒。其脉迟紧者，脓未成，可下之，当有血。脉洪数者，脓已成，不可下也。大黄牡丹汤主之。",source:"疮痈肠痈浸淫病脉证并治第十八"}]},
+{id:"消渴（金匮）",meridian:"金匮·消渴",formula:"肾气丸",article:"消渴小便不利淋病脉证并治第十三",main:["男子消渴","小便反多","以饮一斗，小便一斗"],secondary:[],mechanism:"肾阳不足，不能蒸化津液。",key:"饮一斗，小便一斗",differentiate:[["厥阴病证","肾阳虚 vs 上热下寒"],["太阳蓄水证","小便多 vs 小便不利"]],variants:[],articles:[{text:"男子消渴，小便反多，以饮一斗，小便一斗，肾气丸主之。",source:"消渴小便不利淋病脉证并治第十三"}]}
 ],
 
 formulas:[
@@ -348,6 +397,140 @@ contraindication:"",variants:[]},
 ingredients:[["茯苓","二两（10g）","利水渗湿"],["桂枝","二两（10g）","温阳化气"],["生姜","三两（15g）","温散水气"],["甘草","一两（5g）","调和"]],
 method:"",action:"温中化饮，通阳利水。",formulaMeaning:"茯苓利水渗湿；桂枝温阳化气；生姜温散水饮。",
 contraindication:"",variants:[]}
+,
+{id:"苓桂术甘汤",alias:"",category:"利水",syndrome:"痰饮病",
+ingredients:[["茯苓","四两（20g）","利水渗湿"],["桂枝","三两（15g）","温阳化气"],["白术","三两（15g）","健脾燥湿"],["甘草","二两（10g）","调和诸药"]],
+method:"上四味，以水六升，煮取三升，分温三服。",
+action:"温阳化饮，健脾利湿。",formulaMeaning:"茯苓利水渗湿（君药）；桂枝温阳化气（臣药）；白术健脾燥湿；甘草调和诸药。",
+contraindication:"",variants:[]},
+
+{id:"防己黄芪汤",alias:"",category:"利水",syndrome:"水气病",
+ingredients:[["防己","一两（5g）","利水消肿"],["黄芪","一两一分（约5.3g）","益气固表"],["白术","七钱半（约2.6g）","健脾燥湿"],["甘草","半两（2.5g）","调和"]],
+method:"上锉麻豆大，每抄五钱匕，生姜四片，大枣一枚，水盏半，煎八分，去滓温服。",
+action:"益气祛风，健脾利水。",formulaMeaning:"黄芪益气固表；防己利水消肿；白术健脾燥湿；甘草调和。",
+contraindication:"",variants:[]},
+
+{id:"越婢加术汤",alias:"",category:"解表",syndrome:"皮水",
+ingredients:[["麻黄","六两（30g）","发汗利水"],["石膏","半斤（40g）","清热"],["生姜","三两（15g）","助解表"],["甘草","二两（10g）","调和"],["大枣","十五枚（约37.5g）","和中"],["白术","四两（20g）","健脾燥湿"]],
+method:"",action:"发汗利水，清热健脾。",formulaMeaning:"麻黄发汗利水；石膏清热；白术健脾燥湿。",
+contraindication:"",variants:[]},
+
+{id:"茵陈蒿汤",alias:"",category:"清热",syndrome:"谷疸",
+ingredients:[["茵陈蒿","六两（30g）","清热利湿退黄"],["栀子","十四枚（约7g）","清热利湿"],["大黄","二两（10g）","泻热通便"]],
+method:"上三味，以水一斗二升，先煮茵陈减六升，内二味，煮取三升，去滓，分三服。",
+action:"清热利湿退黄。",formulaMeaning:"茵陈蒿清热利湿退黄（君药）；栀子清热利湿；大黄泻热通便，导热下行。",
+contraindication:"",variants:[]},
+
+{id:"茵陈五苓散",alias:"",category:"利水",syndrome:"黄疸（寒湿）",
+ingredients:[["茵陈蒿","末十分（约10g）","利湿退黄"],["猪苓","十八铢（约3.8g）","利水渗湿"],["泽泻","一两六铢（约6.3g）","利水渗湿"],["白术","十八铢（约3.8g）","健脾燥湿"],["茯苓","十八铢（约3.8g）","利水渗湿"],["桂枝","半两（2.5g）","温阳化气"]],
+method:"",action:"利湿退黄，温阳化气。",formulaMeaning:"五苓散加茵陈，利湿退黄之力更强。",
+contraindication:"",variants:[]},
+
+{id:"栝楼薤白白酒汤",alias:"",category:"理气",syndrome:"胸痹",
+ingredients:[["栝楼实","一枚捣（约50g）","宽胸化痰"],["薤白","半升（约25g）","通阳散结"],["白酒","七升","温通血脉"]],
+method:"上三味，同煮，取二升，分温再服。",
+action:"通阳散结，行气祛痰。",formulaMeaning:"栝楼实宽胸化痰（君药）；薤白通阳散结；白酒温通血脉。",
+contraindication:"",variants:[]},
+
+{id:"栝楼薤白半夏汤",alias:"",category:"理气",syndrome:"胸痹重症",
+ingredients:[["栝楼实","一枚捣（约50g）","宽胸化痰"],["薤白","三两（15g）","通阳散结"],["半夏","半升（约40g）","化痰降逆"],["白酒","一斗","温通血脉"]],
+method:"",action:"通阳散结，祛痰宽胸。",formulaMeaning:"栝楼薤白白酒汤加半夏，增强化痰降逆之力。",
+contraindication:"",variants:[]},
+
+{id:"黄芪桂枝五物汤",alias:"",category:"补益",syndrome:"血痹",
+ingredients:[["黄芪","三两（15g）","益气固表"],["芍药","三两（15g）","养血和营"],["桂枝","三两（15g）","温经通阳"],["生姜","六两（30g）","温散"],["大枣","十二枚（约30g）","补中"]],
+method:"上五味，以水六升，煮取二升，温服七合，日三服。",
+action:"益气温经，和血通痹。",formulaMeaning:"黄芪益气固表（君药）；桂枝温经通阳；芍药养血和营；生姜+大枣调和营卫。",
+contraindication:"",variants:[]},
+
+{id:"小建中汤",alias:"",category:"补益",syndrome:"虚劳",
+ingredients:[["桂枝","三两（15g）","温中"],["芍药","六两（30g）","缓急止痛"],["甘草","三两（15g）","补中"],["生姜","三两（15g）","温中"],["大枣","十二枚（约30g）","补中"],["胶饴","一升（约15g）","甘温补中"]],
+method:"上六味，以水七升，煮取三升，去滓，内胶饴，更上微火消解，温服一升，日三服。",
+action:"温中补虚，和里缓急。",formulaMeaning:"桂枝汤倍芍药加胶饴。胶饴甘温补中（君药）；芍药倍用缓急止痛。",
+contraindication:"",variants:[]},
+
+{id:"酸枣仁汤",alias:"",category:"补益",syndrome:"虚劳失眠",
+ingredients:[["酸枣仁","二升（约30g）","养心安神"],["茯苓","二两（10g）","宁心安神"],["知母","二两（10g）","清热除烦"],["川芎","二两（10g）","调血疏肝"],["甘草","一两（5g）","调和"]],
+method:"上五味，以水八升，煮酸枣仁得六升，内诸药，煮取三升，分温三服。",
+action:"养血安神，清热除烦。",formulaMeaning:"酸枣仁养心安神（君药）；茯苓宁心；知母清热除烦；川芎调血疏肝；甘草调和。",
+contraindication:"",variants:[]},
+
+{id:"肾气丸",alias:"八味肾气丸、崔氏八味丸",category:"补益",syndrome:"肾气虚",
+ingredients:[["干地黄","八两（40g）","滋阴补肾"],["山药","四两（20g）","补脾益肾"],["山茱萸","四两（20g）","补益肝肾"],["泽泻","三两（15g）","利水渗湿"],["茯苓","三两（15g）","利水渗湿"],["牡丹皮","三两（15g）","清热凉血"],["桂枝","一两（5g）","温通阳气"],["附子","一枚炮（约15g）","温肾助阳"]],
+method:"上八味，末之，炼蜜和丸梧子大，酒下十五丸，加至二十五丸，日再服。",
+action:"补肾助阳。",formulaMeaning:"干地黄滋阴补肾（君药）；山药、山茱萸补益肝脾肾；桂枝、附子温阳化气；泽泻、茯苓利水渗湿；丹皮清热。阴中求阳，少火生气。",
+contraindication:"",variants:[]},
+
+{id:"奔豚汤",alias:"",category:"理气",syndrome:"奔豚气",
+ingredients:[["甘草","二两（10g）","调和"],["川芎","二两（10g）","行气活血"],["当归","二两（10g）","养血"],["半夏","四两（20g）","降逆"],["黄芩","二两（10g）","清热"],["葛根","五两（25g）","升津"],["芍药","二两（10g）","缓急"],["生姜","四两（20g）","散寒"],["甘李根白皮","一升（约15g）","降逆气"]],
+method:"",action:"平冲降逆，和血清热。",formulaMeaning:"甘李根白皮降逆气（君药）；当归、川芎养血行血；半夏降逆；黄芩清热。",
+contraindication:"",variants:[]},
+
+{id:"甘草干姜汤",alias:"",category:"温里",syndrome:"肺痿",
+ingredients:[["甘草","四两（20g）","补中益气"],["干姜","二两（10g）","温中复阳"]],
+method:"上二味，以水三升，煮取一升五合，去滓，分温再服。",
+action:"温肺复气。",formulaMeaning:"甘草补中益气；干姜温中复阳。辛甘化阳，温复肺气。",
+contraindication:"",variants:[]},
+
+{id:"千金苇茎汤",alias:"",category:"清热",syndrome:"肺痈",
+ingredients:[["苇茎","二升（约30g）","清肺泄热"],["薏苡仁","半升（约30g）","清热排脓"],["瓜瓣（冬瓜仁）","半升（约30g）","清热化痰"],["桃仁","三十枚（约15g）","活血排脓"]],
+method:"上四味，以水一斗，先煮苇茎得五升，去滓，内诸药，煮取二升，服一升，再服当吐如脓。",
+action:"清肺化痰，逐瘀排脓。",formulaMeaning:"苇茎清肺泄热（君药）；薏苡仁、冬瓜仁清热化痰排脓；桃仁活血逐瘀。",
+contraindication:"",variants:[]},
+
+{id:"大半夏汤",alias:"",category:"理气",syndrome:"胃反呕吐",
+ingredients:[["半夏","二升（约80g）","降逆止呕"],["人参","三两（15g）","补中益气"],["白蜜","一升（约15g）","润燥和中"]],
+method:"上三味，以水一斗二升，和蜜扬之二百四十遍，煮取二升半，温服一升，余分再服。",
+action:"和胃降逆，补虚润燥。",formulaMeaning:"半夏降逆止呕（君药）；人参补中益气；白蜜润燥和中。",
+contraindication:"",variants:[]},
+
+{id:"甘麦大枣汤",alias:"",category:"补益",syndrome:"脏躁",
+ingredients:[["甘草","三两（15g）","和中缓急"],["小麦","一升（约15g）","养心安神"],["大枣","十枚（约25g）","补中益气"]],
+method:"上三味，以水六升，煮取三升，温分三服。",
+action:"养心安神，和中缓急。",formulaMeaning:"小麦养心安神（君药）；甘草和中缓急；大枣补中益气。三味甘缓，润燥安神。",
+contraindication:"",variants:[]},
+
+{id:"半夏厚朴汤",alias:"",category:"理气",syndrome:"梅核气",
+ingredients:[["半夏","一升（约80g）","化痰降逆"],["厚朴","三两（15g）","行气散结"],["茯苓","四两（20g）","健脾渗湿"],["生姜","五两（25g）","散结止呕"],["苏叶","二两（10g）","理气解郁"]],
+method:"上五味，以水七升，煮取四升，分温四服，日三夜一服。",
+action:"行气散结，降逆化痰。",formulaMeaning:"半夏化痰降逆（君药）；厚朴行气散结；茯苓健脾渗湿；生姜散结止呕；苏叶理气解郁。",
+contraindication:"",variants:[]},
+
+{id:"桂枝茯苓丸",alias:"",category:"理血",syndrome:"妇人癥病",
+ingredients:[["桂枝","等分","温通血脉"],["茯苓","等分","健脾渗湿"],["牡丹皮","等分","活血散瘀"],["桃仁","等分（去皮尖）","活血祛瘀"],["芍药","等分","养血和营"]],
+method:"上五味，末之，炼蜜和丸如兔屎大，每日食前服一丸，不知加至三丸。",
+action:"活血化瘀，缓消癥块。",formulaMeaning:"桂枝温通血脉；桃仁活血祛瘀；丹皮活血散瘀；芍药养血和营；茯苓健脾渗湿。",
+contraindication:"",variants:[]},
+
+{id:"当归芍药散",alias:"",category:"理血",syndrome:"妇人腹痛",
+ingredients:[["当归","三两（15g）","养血活血"],["芍药","一斤（80g）","缓急止痛"],["川芎","半斤（40g）","行气活血"],["茯苓","四两（20g）","健脾渗湿"],["白术","四两（20g）","健脾燥湿"],["泽泻","半斤（40g）","利水渗湿"]],
+method:"上六味，杵为散，取方寸匕，酒和，日三服。",
+action:"养血疏肝，健脾利湿。",formulaMeaning:"当归、芍药、川芎养血疏肝；茯苓、白术、泽泻健脾利湿。",
+contraindication:"",variants:[]},
+
+{id:"温经汤",alias:"",category:"温里",syndrome:"冲任虚寒",
+ingredients:[["吴茱萸","三两（15g）","温经散寒"],["当归","二两（10g）","养血活血"],["川芎","二两（10g）","行气活血"],["芍药","二两（10g）","养血和营"],["人参","二两（10g）","补气"],["桂枝","二两（10g）","温经通阳"],["阿胶","二两（10g）","滋阴养血"],["牡丹皮","二两（10g）","活血散瘀"],["生姜","二两（10g）","温中"],["甘草","二两（10g）","调和"],["半夏","半升（约40g）","降逆"],["麦门冬","一升（约15g）","滋阴润燥"]],
+method:"上十二味，以水一斗，煮取三升，分温三服。",
+action:"温经散寒，养血祛瘀。",formulaMeaning:"吴茱萸温经散寒（君药）；当归、川芎、芍药养血活血；桂枝温经通阳；阿胶滋阴养血；人参补气；丹皮活血；麦冬滋阴润燥。温清并用，补泻兼施。",
+contraindication:"",variants:[]},
+
+{id:"当归生姜羊肉汤",alias:"",category:"温里",syndrome:"寒疝",
+ingredients:[["当归","三两（15g）","养血活血"],["生姜","五两（25g）","温中散寒"],["羊肉","一斤（80g）","温补气血"]],
+method:"上三味，以水八升，煮取三升，温服七合，日三服。",
+action:"温中补虚，散寒止痛。",formulaMeaning:"羊肉温补气血（君药）；当归养血活血；生姜温中散寒。药食同源，温补兼行。",
+contraindication:"",variants:[]},
+
+{id:"百合地黄汤",alias:"",category:"补益",syndrome:"百合病",
+ingredients:[["百合","七枚擘（约35g）","养阴清热"],["生地黄汁","一升（约15g）","滋阴清热"]],
+method:"上二味，以水洗百合，渍一宿，当白沫出，去其水，更以泉水二升，煎取一升，去滓，内地黄汁，煎取一升五合，分温再服。",
+action:"养阴清热，润心肺。",formulaMeaning:"百合养阴清热润心肺（君药）；生地黄滋阴清热。",
+contraindication:"",variants:[]},
+
+{id:"大黄牡丹汤",alias:"",category:"泻下",syndrome:"肠痈",
+ingredients:[["大黄","四两（20g）","泻热逐瘀"],["牡丹皮","一两（5g）","凉血散瘀"],["桃仁","五十个（约25g）","活血祛瘀"],["冬瓜仁","半升（约30g）","清热排脓"],["芒硝","三合（约4.5g）","软坚散结"]],
+method:"上五味，以水六升，煮取一升，去滓，内芒硝，再煎沸，顿服之，有脓当下；如无脓，当下血。",
+action:"泻热破瘀，散结消肿。",formulaMeaning:"大黄泻热逐瘀（君药）；芒硝软坚散结；桃仁、丹皮活血散瘀；冬瓜仁清热排脓。",
+contraindication:"脓已成者不可下。",variants:[]}
 ],
 
 symptoms:[
@@ -385,7 +568,25 @@ symptoms:[
 {id:"大渴",category:"全身",syndromes:[{name:"阳明经证",feature:"大渴",accompany:"大热、大汗出",formula:"白虎汤"},{name:"太阳蓄水证",feature:"消渴",accompany:"小便不利",formula:"五苓散"},{name:"厥阴病证",feature:"消渴",accompany:"气上撞心、心中疼热",formula:"乌梅丸"}]},
 {id:"小便难",category:"里证",syndromes:[{name:"太阳病发汗太过阳虚证",feature:"小便难",accompany:"汗漏不止、恶风",formula:"桂枝加附子汤"}]},
 {id:"饥",category:"全身",syndromes:[{name:"厥阴病证",feature:"饥而不欲食",accompany:"消渴、气上撞心",formula:"乌梅丸"}]},
-{id:"蛔",category:"全身",syndromes:[{name:"蛔厥证",feature:"吐蛔",accompany:"手足厥冷、时烦时止",formula:"乌梅丸"},{name:"厥阴病证",feature:"食则吐蛔",accompany:"消渴、气上撞心",formula:"乌梅丸"}]}
+{id:"蛔",category:"全身",syndromes:[{name:"蛔厥证",feature:"吐蛔",accompany:"手足厥冷、时烦时止",formula:"乌梅丸"},{name:"厥阴病证",feature:"食则吐蛔",accompany:"消渴、气上撞心",formula:"乌梅丸"}]},
+{id:"头眩",category:"全身",syndromes:[{name:"痰饮病",feature:"目眩",accompany:"心下逆满、气上冲胸",formula:"苓桂术甘汤"}]},
+{id:"心悸",category:"全身",syndromes:[{name:"痰饮病",feature:"心悸",accompany:"短气、头眩",formula:"苓桂术甘汤"}]},
+{id:"咳逆倚息",category:"全身",syndromes:[{name:"支饮",feature:"咳逆倚息不得卧",accompany:"短气",formula:"小青龙汤"}]},
+{id:"身黄",category:"全身",syndromes:[{name:"谷疸",feature:"身黄如橘子色",accompany:"小便不利、腹微满",formula:"茵陈蒿汤"},{name:"黄疸（寒湿）",feature:"身黄晦暗",accompany:"小便不利",formula:"茵陈五苓散"}]},
+{id:"胸背痛",category:"全身",syndromes:[{name:"胸痹",feature:"胸背痛",accompany:"短气、喘息咳唾",formula:"栝楼薤白白酒汤"}]},
+{id:"心痛彻背",category:"全身",syndromes:[{name:"胸痹重症",feature:"心痛彻背",accompany:"不得卧",formula:"栝楼薤白半夏汤"}]},
+{id:"身体不仁",category:"全身",syndromes:[{name:"血痹",feature:"身体不仁",accompany:"如风痹状",formula:"黄芪桂枝五物汤"}]},
+{id:"虚烦不得眠",category:"全身",syndromes:[{name:"虚劳失眠",feature:"虚烦不得眠",accompany:"",formula:"酸枣仁汤"}]},
+{id:"虚劳腰痛",category:"全身",syndromes:[{name:"肾气虚",feature:"虚劳腰痛",accompany:"少腹拘急、小便不利",formula:"肾气丸"}]},
+{id:"气上冲咽喉",category:"全身",syndromes:[{name:"奔豚气",feature:"气从少腹上冲咽喉",accompany:"发作欲死、复还止",formula:"奔豚汤"}]},
+{id:"咳唾涎沫",category:"全身",syndromes:[{name:"肺痿",feature:"咳唾涎沫",accompany:"小便数、不渴",formula:"甘草干姜汤"}]},
+{id:"咳吐脓血",category:"全身",syndromes:[{name:"肺痈",feature:"咳吐脓血如米粥",accompany:"胸中满痛",formula:"千金苇茎汤"}]},
+{id:"朝食暮吐",category:"全身",syndromes:[{name:"胃反呕吐",feature:"朝食暮吐，暮食朝吐",accompany:"宿谷不化",formula:"大半夏汤"}]},
+{id:"喜悲伤欲哭",category:"全身",syndromes:[{name:"脏躁",feature:"喜悲伤欲哭",accompany:"象如神灵所作、数欠伸",formula:"甘麦大枣汤"}]},
+{id:"咽中如有炙脔",category:"全身",syndromes:[{name:"梅核气",feature:"咽中如有炙脔",accompany:"",formula:"半夏厚朴汤"}]},
+{id:"饮一斗小便一斗",category:"里证",syndromes:[{name:"消渴（金匮）",feature:"饮一斗，小便一斗",accompany:"",formula:"肾气丸"}]},
+{id:"少腹肿痞",category:"里证",syndromes:[{name:"肠痈",feature:"少腹肿痞",accompany:"按之即痛、时时发热",formula:"大黄牡丹汤"}]},
+{id:"少腹里急",category:"里证",syndromes:[{name:"冲任虚寒",feature:"少腹里急",accompany:"暮即发热、手掌烦热",formula:"温经汤"}]},
 ]
 };
 
